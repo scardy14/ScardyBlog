@@ -3,19 +3,18 @@ package org.scardy.scardyblog.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class moveController {
 	@GetMapping(value= {"/","index","home","//"})
 	public String homeMove(Model model) {
 		model.addAttribute("mode", "home");
-		return "main";
+		return "content/index";
 	}
 	@GetMapping("moveBlog")
 	public String blogMove(Model model) {
 		model.addAttribute("mode", "blog");
-		return "contant/blog";
+		return "content/blog";
 	}
 	@GetMapping("moveAbout")
 	public String aboutMove(Model model) {
