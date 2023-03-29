@@ -19,30 +19,30 @@ public class moveController {
 	@GetMapping("moveAbout")
 	public String aboutMove(Model model) {
 		model.addAttribute("mode", "about");
-		return "contant/about";
+		return "content/about";
 	}
 	@GetMapping("movePortfolio")
 	public String portfolioMove(Model model) {
 		model.addAttribute("mode", "portfolio");
-		return "contant/portfolio";
+		return "content/portfolio";
 	}
 	@GetMapping("moveContact")
 	public String contactMove(Model model) {
 		model.addAttribute("mode", "contact");
-		return "contant/contact";
+		return "content/contact";
 	}
 	@GetMapping("moveLogin")
 	public String loginMove(Model model) {
 		model.addAttribute("mode", "login");
-		return "contant/login";
+		return "content/login";
 	}
 	@GetMapping("blogMode")
 	public String blogJavaMove(String blogMode, Model model) {
 		model.addAttribute("blogMode", blogMode);
-		return "contant/blogMode";
+		return "content/blogMode";
 	}
 	@GetMapping("wrtieBlog")
 	public String writeBlog() {
-		return "contatn/writeBlog";
+		return "content/writeBlog";
 	}
 }

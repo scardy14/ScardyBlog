@@ -6,11 +6,11 @@
 <head>
 <title>Insert title here</title>
 </head>
-<div layout:fragment="sidebar">
+<div th:fragment="sidebar">
 	<div id="fh5co-page">
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		<aside id="fh5co-aside" role="complementary"
-			class="border js-fullheight">
+			class="border js-fullheight" style="background-color: #222222;">
 
 			<h1 id="fh5co-logo">
 				<a href="#" th:href="@{/home}" style="color: white;">Scardy</a>
@@ -40,7 +40,7 @@
 			</nav>
 
 			<div class="fh5co-footer">
-				<p>
+				<p style="color: white;">
 					<small>&copy; 2016 Blend Free HTML5. All Rights Reserved. <span>Designed
 							by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a>
 					</span> <span>Demo Images: <a href="https://unsplash.com/"
