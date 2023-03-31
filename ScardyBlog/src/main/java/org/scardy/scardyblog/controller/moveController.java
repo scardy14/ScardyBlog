@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class moveController {
-	@GetMapping(value= {"/","index","home","//"})
+	@GetMapping(value= {"/","/index","/home",""})
 	public String homeMove(Model model) {
 		model.addAttribute("mode", "home");
 		return "content/index";
 	}
-	@GetMapping("moveBlog")
+	@GetMapping("/moveBlog")
 	public String blogMove(Model model) {
 		model.addAttribute("mode", "blog");
-		return "content/blog";
+		return "content/blog/blog";
 	}
 	@GetMapping("moveAbout")
 	public String aboutMove(Model model) {
@@ -31,7 +31,7 @@ public class moveController {
 		model.addAttribute("mode", "contact");
 		return "content/contact";
 	}
-	@GetMapping("moveLogin")
+	@GetMapping("/moveLogin")
 	public String loginMove(Model model) {
 		model.addAttribute("mode", "login");
 		return "content/login";
@@ -39,10 +39,10 @@ public class moveController {
 	@GetMapping("blogMode")
 	public String blogJavaMove(String blogMode, Model model) {
 		model.addAttribute("blogMode", blogMode);
-		return "content/blogMode";
+		return "content/blog/blogMode";
 	}
-	@GetMapping("wrtieBlog")
+	@GetMapping("/writeBlog")
 	public String writeBlog() {
-		return "content/writeBlog";
+		return "content/blog/writeBlog";
 	}
 }

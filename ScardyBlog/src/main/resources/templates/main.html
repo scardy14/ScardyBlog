@@ -59,7 +59,7 @@
 		<!-- content 삽입 -->
 		
 		<!-- footer 삽입 -->
-		<th:block th:replace="layouts/footer::footer"></th:block>
+		<th:block th:replace="layouts/footer :: footer"></th:block>
 	</div>
 	
 	<!-- jQuery -->
@@ -75,14 +75,6 @@
 	<!-- MAIN JS -->
 	<script src="js/main.js"></script>
 	<!-- blog -->
-	<script th:inline = "javascript">
-		function writeBlog() {
-			if(confirm("글을 작성하시겠습니까?")) {
-				location.href = "/blogWrite";
-			}
-			
-		}
-	</script>
 	</body>	
 </html>
 

@@ -91,12 +91,11 @@ figure figcaption {
 #fh5co-aside {
   padding-top: 60px;
   padding-bottom: 40px;
-  width: 20%;
+  width: 18%;
   position: fixed;
   bottom: 0;
   top: 0;
   left: 0;
-  overflow-y: scroll;
   z-index: 1001;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
