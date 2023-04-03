@@ -23,8 +23,9 @@ public class SpringSecurityConfigure  {
                //.requestMatchers("/writeBlog").hasRole("ADMIN")
                .anyRequest().permitAll())
        .formLogin(login -> login
-               .loginPage("/loginForm")
+               .loginPage("/moveLogin")
                .loginProcessingUrl("/login")
+               .failureUrl("/moveLogin")
                .defaultSuccessUrl("/home"))
        .logout(logout -> logout
                .logoutUrl("/logout")

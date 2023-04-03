@@ -4,8 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
-public class moveController {
+@RequiredArgsConstructor
+public class moveController{	
 	@GetMapping(value= {"/","/index","/home",""})
 	public String homeMove(Model model) {
 		model.addAttribute("mode", "home");
