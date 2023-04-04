@@ -29,7 +29,7 @@ public class SpringSecurityConfigure  {
                .defaultSuccessUrl("/home"))
        .logout(logout -> logout
                .logoutUrl("/logout")
-               .logoutSuccessUrl("/loginForm"));
+               .logoutSuccessUrl("/home"));
 
        return http.build();
    }

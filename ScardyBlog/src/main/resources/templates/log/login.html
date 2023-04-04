@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+	layout:decorate="~{main}">
+<head>
+<title>Blog</title>
+</head>
+<div layout:fragment="content">
+	<div id="fh5co-main">
+		<div class="container">
+	        <div class="row">
+	            <div class="col-lg-3 col-md-2"></div>
+	            <div class="col-lg-6 col-md-8 login-box">
+	                <div class="col-lg-12 login-key">
+	                    <i class="fa fa-key" aria-hidden="true"></i>
+	                </div>
+	                <div class="col-lg-12 login-title" sec:authorize="isAnonymous()">
+	                    LOGIN PANEL
+	                </div>
+	                <div class="col-lg-12 login-title" sec:authorize="isAuthenticated()">
+			            LOGOUT PANEL
+			        </div>
+	
+	                <div class="col-lg-12 login-form">
+	                    <div class="col-lg-12 login-form">
+	                        <form th:action="@{/login}"   action="/login" method="post" id="loginForm" sec:authorize="isAnonymous()">
+	                            <div class="form-group">
+	                                <label class="form-control-label" >ID</label>
+	                                <input type="text"  name="username"class="form-control">
+	                            </div>
+	                            <div class="form-group">
+	                                <label class="form-control-label">PASSWORD</label>
+	                                <input type="password"  name="password"class="form-control">
+	                            </div>
+	
+	                            <div class="col-lg-12 loginbttm">
+	                                <div class="col-lg-6 login-btm login-text">
+	                                    <!-- Error Message -->
+	                                </div>
+	                                <div class="col-lg-6 login-btm login-button">
+	                                    <button type="submit" class="btn btn-outline-primary">LOGIN</button>
+	                                </div>
+	                            </div>
+	                        </form>
+	                        
+	                        
+	                        
+	                        <div class="form-group">
+	                        <th:block sec:authorize="isAuthenticated()">
+								<span sec:authentication="principal.name"></span>님 <br>
+								<form id="logoutForm" th:action="@{/logout}" method="post">
+									<div class="logout-button">
+										<button type="submit" class="btn btn-outline-primary" style="width: 100%;">LOGOUT</button>
+									</div>
+								</form>
+								<br><br><br>
+								<a th:href="@{/moveUpdateAccountForm}" style="float: left; padding-left: 20%;">회원정보수정</a>
+								<a th:href="@{/enterCafe}" style="float: right; padding-right: 20%;">카페가기</a>
+								<!--/* 
+								         sec:authorize="hasRole('ROLE_ADMIN')" 을 이용해  ROLE_ADMIN 권한이 있을 때만 보이도록 한다 
+								   */-->
+								<a th:href="@{/admin/main}" sec:authorize="hasRole('ROLE_ADMIN')">관리자모드</a><br>	
+							</th:block>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-3 col-md-2"></div>
+	            </div>
+	       	</div>
+		</div>
+	
+	
+	
+	</div>
+</div>

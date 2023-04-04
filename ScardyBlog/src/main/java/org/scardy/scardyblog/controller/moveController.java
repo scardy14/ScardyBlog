@@ -34,11 +34,20 @@ public class moveController{
 		model.addAttribute("mode", "contact");
 		return "content/contact";
 	}
+	
+	
 	@GetMapping("/moveLogin")
 	public String loginMove(Model model) {
 		model.addAttribute("mode", "login");
-		return "content/login";
+		return "log/login";
 	}
+	@GetMapping("/moveUpdateAccountForm")
+	public String moveUpdateAccountForm() {
+		return "log/update-form";
+	}
+	
+	
+	
 	@GetMapping("blogMode")
 	public String blogJavaMove(String blogMode, Model model) {
 		model.addAttribute("blogMode", blogMode);
@@ -48,4 +57,5 @@ public class moveController{
 	public String writeBlog() {
 		return "content/blog/writeBlog";
 	}
+	
 }

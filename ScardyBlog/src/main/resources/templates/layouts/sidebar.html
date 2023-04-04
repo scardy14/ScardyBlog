@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 	layout:decorate="~{main}">
 <head>
 <title>Insert title here</title>
@@ -28,14 +29,10 @@
 						href="#" th:href="@{/moveAbout}" style="color: white;">About</a></li>
 					<li th:classappend="${mode} == 'contact' ? 'fh5co-active'"><a
 						href="#" th:href="@{/moveContact}" style="color: white;">Contact</a></li>
-					<th:block th:unldess="${loginInfo}">
-						<li th:classappend="${mode} == 'login' ? 'fh5co-active'"><a
-							href="#" th:href="@{/moveLogin}" style="color: white;">Login</a></li>
-						<th:block>
-							<th:block th:if="${loginInfo}">
-								<li><a href="#" th:href="@{/moveLogout}"
-									style="color: white;">Logout</a></li>
-							</th:block>
+					<li th:classappend="${mode} == 'login' ? 'fh5co-active'">
+						<a href="#" th:href="@{/moveLogin}" style="color: white;" sec:authorize="isAnonymous()">Login</a>
+						<a href="#" th:href="@{/moveLogin}" style="color: white;" sec:authorize="isAuthenticated()">Logout</a>
+					</li>
 				</ul>
 			</nav>
 
