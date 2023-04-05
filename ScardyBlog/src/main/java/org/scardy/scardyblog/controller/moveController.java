@@ -1,8 +1,16 @@
 package org.scardy.scardyblog.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.sql.Clob;
+import java.sql.SQLException;
+
+import org.scardy.scardyblog.repository.BlogRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.util.HtmlUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,11 +54,20 @@ public class moveController{
 		return "log/update-form";
 	}
 	
-	
-	
-	@GetMapping("blogMode")
-	public String blogJavaMove(String blogMode, Model model) {
-		model.addAttribute("blogMode", blogMode);
+	private final BlogRepository blogRepository;
+	@GetMapping("/moveBlogMode")
+	public String blogJavaMove(String blogMode, Model model) throws IOException, SQLException {
+		Clob clob = blogRepository.findById(7).get().getContent();
+		Reader reader = clob.getCharacterStream();
+		BufferedReader bufferedReader = new BufferedReader(reader);
+		StringBuilder contentStringBuilder = new StringBuilder();
+		String line;
+		 while ((line = bufferedReader.readLine()) != null) {
+		        contentStringBuilder.append(line);
+		    }
+		
+		System.out.println(contentStringBuilder.toString());
+		model.addAttribute("content", contentStringBuilder.toString());
 		return "content/blog/blogMode";
 	}
 	@GetMapping("/writeBlog")

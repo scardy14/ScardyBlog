@@ -8,13 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/각자 발급받은 api key/tinymce/5/tinymce.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/xdm6ceas0xqvy9q3l6jjkyll6abbs3jzwes0hgljgo9mfb3y/tinymce/5/tinymce.min.js"></script>
 	<title>블로그 작성</title>
 </head>
 <div layout:fragment="content">
 	<div id="fh5co-main">
 		<h1>TinyMCE Quick Start Guide</h1>
 	    <form method="post" th:action="@{/writeBlogPost}" enctype="multipart/form-data">
+	    	<input type = "hidden" name = "id" th:value="${#authentication.getName()}">
+	    	<input type = "text" name = "category" placeholder="카테고리">
+	    	<input type = "text" name = "title" placeholder="제목">
 	        <textarea  name = "content" id="editor">Hello, World!</textarea>
 	        <button type="submit" id="save">게시글 저장</button>
 	    </form>

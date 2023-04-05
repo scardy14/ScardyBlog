@@ -14,3 +14,14 @@ CREATE TABLE grade(
 )
 INSERT INTO account VALUES('scardy','blackmusicnote14','010-6346-2516','홍주영','scardy')
 INSERT INTO grade VALUES('scardy','MASTER')
+
+CREATE SEQUENCE board_seq START WITH 1 INCREMENT BY 1;
+CREATE TABLE board(
+	post_no NUMBER NOT NULL,
+	category VARCHAR2(100) NOT NULL,
+	title VARCHAR2(100) NOT NULL,
+	content clob NOT NULL,
+	id VARCHAR2(100) NOT NULL,
+	CONSTRAINT board_pk PRIMARY KEY(post_no),
+	CONSTRAINT board_fk FOREIGN KEY(id) REFERENCES account(id)
+)
