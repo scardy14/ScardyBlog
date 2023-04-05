@@ -14,12 +14,12 @@
 <div layout:fragment="content">
 	<div id="fh5co-main">
 		<h1>TinyMCE Quick Start Guide</h1>
-	    <form method="post">
-	        <textarea id="editor">Hello, World!</textarea>
-	        <button type="button" id="save">게시글 저장</button>
+	    <form method="post" th:action="@{/writeBlogPost}" enctype="multipart/form-data">
+	        <textarea  name = "content" id="editor">Hello, World!</textarea>
+	        <button type="submit" id="save">게시글 저장</button>
 	    </form>
     </div>
-    <script>
+    <script>    
 $(function(){
     var plugins = [
         "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor",
@@ -42,9 +42,10 @@ $(function(){
         menubar: false,
         plugins: plugins,
         toolbar: edit_toolbar,
-        
+        location: "folder/sub-folder/new-location.png",
         /*** image upload ***/
         image_title: true,
+        //images_upload_url: '/writeBlogPostImage',
         /* enable automatic uploads of images represented by blob or data URIs*/
         automatic_uploads: true,
         /*

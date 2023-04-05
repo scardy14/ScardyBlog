@@ -9,8 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
-@Table(name="account")
+@Entity // VO라는걸 알려주는거
+@Table(name="account") //어느 테이블에서 정보를 연동시킬지
 @AllArgsConstructor
 @NoArgsConstructor
 public class Account{
@@ -25,5 +25,4 @@ public class Account{
 	private String name;
 	@Column
 	private String nickname;
-	
 }
