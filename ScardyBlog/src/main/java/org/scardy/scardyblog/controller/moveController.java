@@ -41,9 +41,8 @@ public class moveController{
 		 while ((line = bufferedReader.readLine()) != null) {
 		        contentStringBuilder.append(line);
 		    }
-		
-		System.out.println(contentStringBuilder.toString());
 		model.addAttribute("content", contentStringBuilder.toString());
+		model.addAttribute("blogMode");
 		return "content/blog/blogMode";
 	}
 	@GetMapping("/writeBlog")
