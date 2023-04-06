@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 	layout:decorate="~{main}">
 <!--/* 위 선언은 타임리프 레이아웃을 사용하기 위한 설정   */-->
 <head>
@@ -270,7 +271,7 @@
 					</div>
 				</div>
 			</div>
-			<div style="text-align: right;">
+			<div style="text-align: right;" sec:authorize="hasAuthority('MASTER')">
 				<button type="button" th:onclick="writeBlog()" th:text="글쓰기"></button>
 			</div>
 		</div>

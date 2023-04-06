@@ -48,7 +48,7 @@
 	                        
 	                        <div class="form-group">
 	                        <th:block sec:authorize="isAuthenticated()">
-								<span sec:authentication="principal.name"></span>님 <br>
+								<!-- <span sec:authentication="principal.name"></span>님 <br> -->
 								<form id="logoutForm" th:action="@{/logout}" method="post">
 									<div class="logout-button">
 										<button type="submit" class="btn btn-outline-primary" style="width: 100%;">LOGOUT</button>
@@ -60,7 +60,7 @@
 								<!--/* 
 								         sec:authorize="hasRole('ROLE_ADMIN')" 을 이용해  ROLE_ADMIN 권한이 있을 때만 보이도록 한다 
 								   */-->
-								<a th:href="@{/admin/main}" sec:authorize="hasRole('ROLE_ADMIN')">관리자모드</a><br>	
+								<a th:href="@{/admin/main}" sec:authorize="hasRole('MASTER')">관리자모드</a><br>	
 							</th:block>
 	                        </div>
 	                    </div>

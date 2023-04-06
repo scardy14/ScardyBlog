@@ -25,3 +25,5 @@ CREATE TABLE board(
 	CONSTRAINT board_pk PRIMARY KEY(post_no),
 	CONSTRAINT board_fk FOREIGN KEY(id) REFERENCES account(id)
 )
+
+SELECT * FROM board;

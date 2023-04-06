@@ -15,20 +15,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 
 @Component
-@Slf4j
 @RequiredArgsConstructor
 public class MemberAuthenticationProvider implements AuthenticationProvider{	
 	private final AccountRepository accountRepository;
 	private final GradeRepository gradeRepository;
-	private final BCryptPasswordEncoder passwordEncoder;
+	//private final BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {		
@@ -68,11 +65,8 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
         
         
         List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-        
         authorities.add(new SimpleGrantedAuthority(grade.getGrade()));
-        System.out.println(authorities);
 		Authentication auth = new UsernamePasswordAuthenticationToken(id, password, authorities);
-		log.debug("MemberAuthenticationProvider 인증처리완료:{}",auth);
 		return auth;		
 	}
 

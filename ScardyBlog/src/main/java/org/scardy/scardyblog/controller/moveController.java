@@ -10,23 +10,59 @@ import org.scardy.scardyblog.repository.BlogRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.util.HtmlUtils;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class moveController{	
+public class moveController{
+///////////////////////////////////////////////////////////////////////////
 	@GetMapping(value= {"/","/index","/home",""})
 	public String homeMove(Model model) {
 		model.addAttribute("mode", "home");
 		return "content/index";
 	}
+///////////////////////////////////////////////////////////////////////////
+	
+///////////////////////////////////////////////////////////////////////////
 	@GetMapping("/moveBlog")
 	public String blogMove(Model model) {
 		model.addAttribute("mode", "blog");
 		return "content/blog/blog";
 	}
+	private final BlogRepository blogRepository;
+	@GetMapping("/moveBlogMode")
+	public String blogJavaMove(String blogMode, Model model) throws IOException, SQLException {
+		Clob clob = blogRepository.findById(7).get().getContent();
+		Reader reader = clob.getCharacterStream();
+		BufferedReader bufferedReader = new BufferedReader(reader);
+		StringBuilder contentStringBuilder = new StringBuilder();
+		String line;
+		 while ((line = bufferedReader.readLine()) != null) {
+		        contentStringBuilder.append(line);
+		    }
+		
+		System.out.println(contentStringBuilder.toString());
+		model.addAttribute("content", contentStringBuilder.toString());
+		return "content/blog/blogMode";
+	}
+	@GetMapping("/writeBlog")
+	public String writeBlog() {
+		return "content/blog/writeBlog";
+	}
+	@GetMapping("/moveWriteBlogSuccess")
+	public String moveWriteBlogSuccess() {
+		return "writeblog-success";
+	}
+	@GetMapping("/moveWriteBlogFail")
+	public String moveWriteBlogFail() {
+		return "writeblog-fail";
+	}
+///////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
 	@GetMapping("moveAbout")
 	public String aboutMove(Model model) {
 		model.addAttribute("mode", "about");
@@ -54,25 +90,6 @@ public class moveController{
 		return "log/update-form";
 	}
 	
-	private final BlogRepository blogRepository;
-	@GetMapping("/moveBlogMode")
-	public String blogJavaMove(String blogMode, Model model) throws IOException, SQLException {
-		Clob clob = blogRepository.findById(7).get().getContent();
-		Reader reader = clob.getCharacterStream();
-		BufferedReader bufferedReader = new BufferedReader(reader);
-		StringBuilder contentStringBuilder = new StringBuilder();
-		String line;
-		 while ((line = bufferedReader.readLine()) != null) {
-		        contentStringBuilder.append(line);
-		    }
-		
-		System.out.println(contentStringBuilder.toString());
-		model.addAttribute("content", contentStringBuilder.toString());
-		return "content/blog/blogMode";
-	}
-	@GetMapping("/writeBlog")
-	public String writeBlog() {
-		return "content/blog/writeBlog";
-	}
+	
 	
 }
