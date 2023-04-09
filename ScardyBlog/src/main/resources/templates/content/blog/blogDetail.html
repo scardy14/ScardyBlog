@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{main}">
+<head>
+<title>Blog</title>
+</head>
+<div layout:fragment="content">
+	<div id="fh5co-main">
+		<div class="fh5co-narrow-content">
+			<div th:utext="${board.getContent()}">content1</div>
+		</div>
+	</div>
+</div>

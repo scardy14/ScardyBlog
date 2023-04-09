@@ -272,14 +272,14 @@
 				</div>
 			</div>
 			<div style="text-align: right;" sec:authorize="hasAuthority('MASTER')">
-				<button type="button" th:onclick="writeBlog()" th:text="글쓰기"></button>
+				<button type="button" th:onclick="moveWriteBlogForm()" th:text="글쓰기"></button>
 			</div>
 		</div>
 	</div>
 		<script th:inline = "javascript">
-		function writeBlog() {
+		function moveWriteBlogForm() {
 			if(confirm("글을 작성하시겠습니까?")) {
-				location.href = "http://127.0.0.1:14/scardyblog/writeBlog";
+				location.href = "http://127.0.0.1:14/scardyblog/moveWriteBlogForm";
 			}
 			
 		}

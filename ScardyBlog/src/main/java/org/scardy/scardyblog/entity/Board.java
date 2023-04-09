@@ -3,6 +3,7 @@ package org.scardy.scardyblog.entity;
 
 
 import java.sql.Clob;
+import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,4 +36,9 @@ public class Board {
 	private Clob content;
 	@Column
 	private String id;
+	@Column
+	private Date post_date;
+	@Column
+	private Date update_date;
+	
 }

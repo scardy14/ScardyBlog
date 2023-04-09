@@ -1,6 +1,6 @@
 package org.scardy.scardyblog.controller;
 
-import org.scardy.scardyblog.model.service.BlogService;
+import org.scardy.scardyblog.service.BlogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;

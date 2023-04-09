@@ -1,12 +1,11 @@
 package org.scardy.scardyblog.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.sql.Clob;
 import java.sql.SQLException;
 
+import org.scardy.scardyblog.entity.Board;
 import org.scardy.scardyblog.repository.BlogRepository;
+import org.scardy.scardyblog.service.BlogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,48 +15,60 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class moveController{
-///////////////////////////////////////////////////////////////////////////
+	private final BlogService blogService;
+	private final BlogRepository blogRepository;
+	///////////////////////////////////////////////////////////////////////////
 	@GetMapping(value= {"/","/index","/home",""})
 	public String homeMove(Model model) {
 		model.addAttribute("mode", "home");
 		return "content/index";
 	}
-///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	
-///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	@GetMapping("/moveBlog")
 	public String blogMove(Model model) {
 		model.addAttribute("mode", "blog");
 		return "content/blog/blog";
 	}
-	private final BlogRepository blogRepository;
+
 	@GetMapping("/moveBlogMode")
 	public String blogJavaMove(String blogMode, Model model) throws IOException, SQLException {
-		Clob clob = blogRepository.findById(7).get().getContent();
-		Reader reader = clob.getCharacterStream();
-		BufferedReader bufferedReader = new BufferedReader(reader);
-		StringBuilder contentStringBuilder = new StringBuilder();
-		String line;
-		 while ((line = bufferedReader.readLine()) != null) {
-		        contentStringBuilder.append(line);
-		    }
-		model.addAttribute("content", contentStringBuilder.toString());
-		model.addAttribute("blogMode");
-		return "content/blog/blogMode";
+	
+		
+		
+		 
+		//model.addAttribute("content", contentStringBuilder.toString());
+		//model.addAttribute("blogMode");
+		//return "content/blog/blogMode";
+		return"redirect:/moveBlogDetail";
 	}
-	@GetMapping("/writeBlog")
-	public String writeBlog() {
-		return "content/blog/writeBlog";
+	@GetMapping("/moveBlogDetail")
+	public String moveBlogDetail(Model model) {
+		Board board = null;
+		try {
+			board = blogService.readBlogPostDetail(1);
+			
+			model.addAttribute(board);
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "content/blog/blogDetail";
+	}
+	@GetMapping("/moveWriteBlogForm")
+	public String moveWriteBlogForm() {
+		return "content/blog/writeBlogForm";
 	}
 	@GetMapping("/moveWriteBlogSuccess")
 	public String moveWriteBlogSuccess() {
-		return "writeblog-success";
+		return "content/blog/writeblog-success";
 	}
 	@GetMapping("/moveWriteBlogFail")
 	public String moveWriteBlogFail() {
-		return "writeblog-fail";
+		return "content/blog/writeblog-fail";
 	}
-///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	
 	
 	

@@ -13,7 +13,7 @@ CREATE TABLE board (
 	content	clob	NOT NULL,
 	id	varchar2(100)	NOT NULL,
 	post_date	date	NOT NULL,
-	update_date	date	NOT NULL
+	update_date	date
 );
 
 CREATE TABLE grade (
