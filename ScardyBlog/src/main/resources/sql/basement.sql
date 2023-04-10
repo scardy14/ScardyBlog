@@ -48,3 +48,11 @@ CREATE SEQUENCE board_seq START WITH 1 INCREMENT BY 1;
 INSERT INTO BOARD VALUES(board_seq.nextval, '테스트 카테고리', '테스트 타이틀', '테스트 컨텐츠', 'scardy',sysdate,sysdate);
 
 SELECT * FROM board;
+
+SELECT *
+FROM board where rownum <=2 AND category='테스트 카테고리';
+
+SELECT *
+FROM board
+ORDER BY post_date DESC
+FETCH FIRST 5 ROWS ONLY;

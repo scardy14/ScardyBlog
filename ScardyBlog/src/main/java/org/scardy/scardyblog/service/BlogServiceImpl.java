@@ -16,14 +16,12 @@ import org.scardy.scardyblog.entity.Board;
 import org.scardy.scardyblog.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class BlogServiceImpl implements BlogService {
-	private final EntityManager entityManager;
 	private final BlogRepository blogRepository;
 
 	@Transactional
@@ -52,8 +50,6 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public Board readBlogPostInfoDetail(int postNo) throws SQLException, IOException {
 		Board board = blogRepository.findById(postNo).get();
-		
-		System.out.println(board);
 		return board;
 	}
 	
@@ -83,12 +79,26 @@ public class BlogServiceImpl implements BlogService {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		return contentStringBuilder;
 	}
+	
+	@Override
+	public List<Board> readBlogPostListByCategoryForBlog(String category) {
+		blogRepository.findByCategoryForBlog(category);
+		return null;
+	}
 
+	@Override
+	public List<Board> readBlogPostListByCategoryForBlogMode(String category) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public List<Board> readBlogPostList(String postNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 	
 }

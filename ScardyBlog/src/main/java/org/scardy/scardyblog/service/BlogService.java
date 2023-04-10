@@ -13,6 +13,10 @@ public interface BlogService {
 	
 	public StringBuilder readBlogPostContentDetail(int postNo) throws SQLException, IOException;
 	
+	public List<Board> readBlogPostListByCategoryForBlog(String category);
+	
+	public List<Board> readBlogPostListByCategoryForBlogMode(String category);
+	
 	public List<Board> readBlogPostList(String postNo);
 	
 }

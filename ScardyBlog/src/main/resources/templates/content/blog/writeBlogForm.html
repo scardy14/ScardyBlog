@@ -15,10 +15,12 @@
 	<br><br><br><br><br>
 	<div id="fh5co-main" style="text-align: center;">
 	    <form method="post" th:action="@{/writeBlogPost}">
-	    	<textarea name = "title" placeholder="제목" class="textareatitle" >제목</textarea><br>
-	    	<input type = "text" name = "category" placeholder="카테고리"><br>
-	    	<div  style="padding-left: 10%;"><textarea  name = "content" id="editor" class="textareacontent">Hello, World!</textarea></div>
-	        
+	    	<select name = "category" class="textareacategory" style="vertical-align: top;">
+	    		<option value="java">java</option>
+	    		<option value="css">css</option>
+	    	</select>&nbsp;&nbsp;
+	    	<textarea name = "title" placeholder="제목" class="textareatitle">제목</textarea><br>
+	    	<div  style="padding-left: 10%; color: whitesmoke; background-color: whitesmoke;"><textarea  name = "content" id="editor">Hello, World!</textarea></div>
 	        <input type = "hidden" name = "id" th:value="${#authentication.getName()}">
 	        <button type="submit" id="save">게시글 저장</button>
 	    </form>
@@ -29,8 +31,8 @@
 $(function(){
     var plugins = [
         "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor",
-        "searchreplace", "visualblocks", "code", "fullscreen", "insertdatetime", "media", "table",
-        "paste", "code", "help", "wordcount", "save"
+        "searchreplace", "visualblocks", "code", "insertdatetime", "media", "table",
+        "paste", "code", "help", "wordcount", "save", "autoresize"
     ];
     var edit_toolbar = 'formatselect fontselect fontsizeselect |'
                + ' forecolor backcolor |'
@@ -43,12 +45,16 @@ $(function(){
     tinymce.init({
     	language: "ko_KR", //한글판으로 변경
         selector: '#editor',
-        height: 1000,
+        elementpath: false,
         width: "89%", // width 값을 100%로 설정
-        menubar: false,
+        statusbar: false,
+        //menubar: false,
         plugins: plugins,
+        content_css: 'style.css',
         toolbar: edit_toolbar,
+        toolbar_sticky: true, // 스크롤시 툴바 고정 여부
         location: "folder/sub-folder/new-location.png",
+        //font_foramts: 'custom font name=origin font name, sub1, sub2...; other...;'
         image_title: true,
         automatic_uploads: true,
         file_picker_types: 'image',
@@ -73,7 +79,7 @@ $(function(){
         },
         /*** image upload ***/
         
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; background-color: transparent;}'
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; background-color: whitesmoke;}'
     });
 
 

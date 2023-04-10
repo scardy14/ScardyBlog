@@ -45,7 +45,6 @@ public class moveController{
 		try {
 			model.addAttribute("board",blogService.readBlogPostInfoDetail(7));
 			model.addAttribute("content",blogService.readBlogPostContentDetail(7).toString());
-			System.out.println(blogService.readBlogPostInfoDetail(7));
 			//System.out.println(blogService.readBlogPostContentDetail(7).toString());
 			path = "content/blog/blogDetail";
 		} catch (SQLException | IOException e) {

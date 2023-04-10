@@ -8,5 +8,8 @@ public interface BlogRepository extends JpaRepository<Board, Integer>{
 	@Query("SELECT MAX(postNo) FROM Board")
 	int findMaxNo();
 	
+	@Query("SELECT * FROM board where rownum <=4 AND category= :category")
+	void findByCategoryForBlog(String category);
+	
 
 }

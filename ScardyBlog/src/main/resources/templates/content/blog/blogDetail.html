@@ -6,13 +6,12 @@
 <title>Blog</title>
 </head>
 <div layout:fragment="content">
-	<div id="fh5co-main">
-		<div class="fh5co-narrow-content">
-			<div th:utext="${board.getTitle()}">제목</div>
+<br><br><br><br><br>
+	<div id="fh5co-main" style="text-align: center;">
+			<textarea th:utext="${board.getTitle()}" class="textareatitle" readonly="readonly">제목</textarea>
 			<div th:utext="${board.getCategory()}">카테고리</div>
 			<div th:utext="${board.getPost_date()}">작성일</div>
 			<div th:utext="${board.getUpdate_date()}">수정일</div>
-			<div th:utext="${content}">내용</div>
-		</div>
+			<div th:utext="${content}" class="textareacontent" style="padding-left: 10%;">내용</div>
 	</div>
 </div>
