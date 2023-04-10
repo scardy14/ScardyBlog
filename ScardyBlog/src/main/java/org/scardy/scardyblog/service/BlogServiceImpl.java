@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.Clob;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialClob;
@@ -30,18 +30,13 @@ public class BlogServiceImpl implements BlogService {
 		board.setId(id);
 		board.setCategory(category);
 		board.setTitle(title);
-		Date currentDate = new Date();
-		Timestamp timestamp = new Timestamp(currentDate.getTime());
-		java.sql.Date sqlDate = new java.sql.Date(timestamp.getTime());
-		board.setPost_date(sqlDate);
-		System.out.println(board);
-		//board.setPost_date(new Date());
 		SerialClob clobContent;
 		try {
 			clobContent = new SerialClob(content.toString().toCharArray());
 			board.setContent(clobContent);
-			//entityManager.persist(board);
-			//entityManager.close();
+			LocalDateTime now = LocalDateTime.now();
+			board.setPost_date(Date.valueOf(now.toLocalDate()));;
+			blogRepository.save(board);		
 		} catch (SerialException e) {
 			e.printStackTrace();
 			return false;
