@@ -9,7 +9,9 @@ import org.scardy.scardyblog.entity.Board;
 public interface BlogService {
 	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content );
 	
-	public Board readBlogPostDetail(int postNo) throws SQLException, IOException;
+	public Board readBlogPostInfoDetail(int postNo) throws SQLException, IOException;
+	
+	public StringBuilder readBlogPostContentDetail(int postNo) throws SQLException, IOException;
 	
 	public List<Board> readBlogPostList(String postNo);
 	

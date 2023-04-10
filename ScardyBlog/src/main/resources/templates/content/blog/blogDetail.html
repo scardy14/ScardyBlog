@@ -8,7 +8,11 @@
 <div layout:fragment="content">
 	<div id="fh5co-main">
 		<div class="fh5co-narrow-content">
-			<div th:utext="${board.getContent()}">content1</div>
+			<div th:utext="${board.getTitle()}">제목</div>
+			<div th:utext="${board.getCategory()}">카테고리</div>
+			<div th:utext="${board.getPost_date()}">작성일</div>
+			<div th:utext="${board.getUpdate_date()}">수정일</div>
+			<div th:utext="${content}">내용</div>
 		</div>
 	</div>
 </div>

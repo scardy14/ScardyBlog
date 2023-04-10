@@ -40,5 +40,4 @@ public class Board {
 	private Date post_date;
 	@Column
 	private Date update_date;
-	
 }

@@ -34,10 +34,6 @@ public class moveController{
 
 	@GetMapping("/moveBlogMode")
 	public String blogJavaMove(String blogMode, Model model) throws IOException, SQLException {
-	
-		
-		
-		 
 		//model.addAttribute("content", contentStringBuilder.toString());
 		//model.addAttribute("blogMode");
 		//return "content/blog/blogMode";
@@ -45,16 +41,18 @@ public class moveController{
 	}
 	@GetMapping("/moveBlogDetail")
 	public String moveBlogDetail(Model model) {
-		Board board = null;
+		String path;
 		try {
-			board = blogService.readBlogPostDetail(1);
-			
-			model.addAttribute(board);
+			model.addAttribute("board",blogService.readBlogPostInfoDetail(7));
+			model.addAttribute("content",blogService.readBlogPostContentDetail(7).toString());
+			System.out.println(blogService.readBlogPostInfoDetail(7));
+			//System.out.println(blogService.readBlogPostContentDetail(7).toString());
+			path = "content/blog/blogDetail";
 		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
+			path = "content/blog/blogDetail-fail";
 			e.printStackTrace();
 		}
-		return "content/blog/blogDetail";
+		return path;
 	}
 	@GetMapping("/moveWriteBlogForm")
 	public String moveWriteBlogForm() {
