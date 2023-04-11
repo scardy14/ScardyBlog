@@ -13,9 +13,9 @@ CREATE TABLE board (
 	content	clob	NOT NULL,
 	id	varchar2(100)	NOT NULL,
 	post_date	date	NOT NULL,
-	update_date	date
+	update_date	date,
+	thumbnail clob
 );
-
 CREATE TABLE grade (
 	id	varchar2(100)	NOT NULL,
 	grade	varchar2(100)	NOT NULL

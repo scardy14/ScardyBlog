@@ -28,24 +28,27 @@ public class moveController{
 	///////////////////////////////////////////////////////////////////////////
 	@GetMapping("/moveBlog")
 	public String blogMove(Model model) {
-		model.addAttribute("mode", "blog");
+		model.addAttribute("javaList", blogService.findListByCategoryForBlog("java"));
+		model.addAttribute("springbootList", blogService.findListByCategoryForBlog("springboot"));
+		model.addAttribute("cssList", blogService.findListByCategoryForBlog("css"));
 		return "content/blog/blog";
 	}
 
 	@GetMapping("/moveBlogMode")
 	public String blogJavaMove(String blogMode, Model model) throws IOException, SQLException {
+		//model.add
 		//model.addAttribute("content", contentStringBuilder.toString());
 		//model.addAttribute("blogMode");
 		//return "content/blog/blogMode";
 		return"redirect:/moveBlogDetail";
 	}
 	@GetMapping("/moveBlogDetail")
-	public String moveBlogDetail(Model model) {
+	public String moveBlogDetail(Model model, int postNo) {
 		String path;
 		try {
-			model.addAttribute("board",blogService.readBlogPostInfoDetail(7));
-			model.addAttribute("content",blogService.readBlogPostContentDetail(7).toString());
-			//System.out.println(blogService.readBlogPostContentDetail(7).toString());
+			model.addAttribute("board",blogService.readBlogPostInfoDetail(postNo));
+			model.addAttribute("content",blogService.readBlogPostContentDetail(postNo).toString());
+			System.out.println(blogService.readBlogPostContentDetail(postNo).toString());
 			path = "content/blog/blogDetail";
 		} catch (SQLException | IOException e) {
 			path = "content/blog/blogDetail-fail";

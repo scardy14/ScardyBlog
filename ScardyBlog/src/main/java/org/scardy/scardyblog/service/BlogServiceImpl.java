@@ -25,18 +25,19 @@ public class BlogServiceImpl implements BlogService {
 	private final BlogRepository blogRepository;
 
 	@Transactional
-	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content ) {
+	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail ) {
 		Board board = new Board();
 		board.setId(id);
 		board.setCategory(category);
 		board.setTitle(title);
+		board.setThumbnail(thumbnail);
 		SerialClob clobContent;
 		try {
 			clobContent = new SerialClob(content.toString().toCharArray());
 			board.setContent(clobContent);
 			LocalDateTime now = LocalDateTime.now();
 			board.setPost_date(Date.valueOf(now.toLocalDate()));;
-			blogRepository.save(board);		
+			blogRepository.save(board);
 		} catch (SerialException e) {
 			e.printStackTrace();
 			return false;
@@ -79,13 +80,13 @@ public class BlogServiceImpl implements BlogService {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		return contentStringBuilder;
 	}
-	
+	/*
 	@Override
 	public List<Board> readBlogPostListByCategoryForBlog(String category) {
 		blogRepository.findByCategoryForBlog(category);
 		return null;
 	}
-
+*/
 	@Override
 	public List<Board> readBlogPostListByCategoryForBlogMode(String category) {
 		// TODO Auto-generated method stub
@@ -96,6 +97,12 @@ public class BlogServiceImpl implements BlogService {
 	public List<Board> readBlogPostList(String postNo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Board> findListByCategoryForBlog(String category) {
+		List<Board> boardList= blogRepository.findListByCategoryForBlog(category);
+		return boardList;
 	}
 
 	

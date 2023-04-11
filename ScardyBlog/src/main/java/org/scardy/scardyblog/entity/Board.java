@@ -40,4 +40,15 @@ public class Board {
 	private Date post_date;
 	@Column
 	private Date update_date;
+	@Column
+	private String thumbnail;
+	public Board(String title, String id, Date post_date, String thumbnail) {
+		super();
+		this.title = title;
+		this.id = id;
+		this.post_date = post_date;
+		this.thumbnail = thumbnail;
+	}
+	
+	
 }

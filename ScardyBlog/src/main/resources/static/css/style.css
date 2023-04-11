@@ -1239,6 +1239,41 @@ input[type=text] {
     font-size: 25px;
 }
 
+.textareatitleblog {
+    background-color: #1A2226;
+    border: none;
+    border-top: 0px;
+    border-radius: 0px;
+    font-weight: bold;
+    outline: 0;
+    margin-bottom: 20px;
+    padding-left: 0px;
+    color: #ECF0F5;
+    width: 80%;
+    height:50px;
+    background: transparent;
+    color: black;
+    font-size: 25px;
+}
+
+.textareaunderline {
+    background-color: #1A2226;
+    border: none;
+    border-bottom: 2px solid #0DB8DE;
+    border-top: 0px;
+    border-radius: 0px;
+    font-weight: bold;
+    outline: 0;
+    margin-bottom: 20px;
+    padding-left: 0px;
+    color: #ECF0F5;
+    width: 80%;
+    height:0px;
+    background: transparent;
+    color: black;
+    font-size: 25px;
+}
+
 .textareacategory {
     background-color: #1A2226;
     border: none;

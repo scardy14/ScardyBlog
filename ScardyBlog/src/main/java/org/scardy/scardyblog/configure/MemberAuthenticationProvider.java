@@ -40,7 +40,6 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 		
 		Optional<Account> accountOptional = accountRepository.findById(id);
 		Account account = accountOptional.get();
-		System.out.println(account);
 		if(account == null){
 			System.out.println("회원아이디가 없습니다.");
 			throw new UsernameNotFoundException("회원 아이디가 존재하지 않습니다");

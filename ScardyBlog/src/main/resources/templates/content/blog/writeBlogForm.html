@@ -22,8 +22,11 @@
 	    	<textarea name = "title" placeholder="제목" class="textareatitle">제목</textarea><br>
 	    	<div  style="padding-left: 10%; color: whitesmoke; background-color: whitesmoke;"><textarea  name = "content" id="editor">Hello, World!</textarea></div>
 	        <input type = "hidden" name = "id" th:value="${#authentication.getName()}">
+	        <input type = "hidden" id="thumbnail" th:value = "sc" name = "thumbnail">
 	        <button type="submit" id="save">게시글 저장</button>
 	    </form>
+	    
+    <div>123124124124124</div>
     </div>
     
     
@@ -70,6 +73,7 @@ $(function(){
                     var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
                     var base64 = reader.result.split(',')[1];
                     var blobInfo = blobCache.create(id, file, base64);
+                    document.getElementById('thumbnail').value = blobInfo.base64();
                     blobCache.add(blobInfo);
                     cb(blobInfo.blobUri(), { title: file.name });
                 };
