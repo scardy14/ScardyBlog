@@ -9,15 +9,15 @@ import org.scardy.scardyblog.entity.Board;
 public interface BlogService {
 	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail );
 	
-	public Board readBlogPostInfoDetail(int postNo) throws SQLException, IOException;
+	public Board findBlogPostInfoDetail(int postNo) throws SQLException, IOException;
 	
-	public StringBuilder readBlogPostContentDetail(int postNo) throws SQLException, IOException;
+	public StringBuilder findBlogPostContentDetail(int postNo) throws SQLException, IOException;
 	
-	//public List<Board> readBlogPostListByCategoryForBlog(String category);
+	//public List<Board> findBlogPostListByCategoryForBlog(String category);
 	
-	public List<Board> readBlogPostListByCategoryForBlogMode(String category);
+	public List<Board> findListByCategoryForBlogMode(String category);
 	
-	public List<Board> readBlogPostList(String postNo);
+	public List<Board> findBlogPostList(String postNo);
 	
 	public List<Board> findListByCategoryForBlog(String category);
 	

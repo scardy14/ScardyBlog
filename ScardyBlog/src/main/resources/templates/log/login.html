@@ -33,15 +33,12 @@
 	                                <label class="form-control-label">PASSWORD</label>
 	                                <input type="password"  name="password"class="form-control">
 	                            </div>
-	
-	                            <div class="col-lg-12 loginbttm">
-	                                <div class="col-lg-6 login-btm login-text">
-	                                    <!-- Error Message -->
-	                                </div>
-	                                <div class="col-lg-6 login-btm login-button">
-	                                    <button type="submit" class="btn btn-outline-primary">LOGIN</button>
-	                                </div>
-	                            </div>
+								<div class="logout-button">
+									<button type="submit" class="btn btn-outline-primary" style="width: 100%;">LOGIN</button>
+								</div>
+								<div class="logout-button">
+									<button type="button" class="btn btn-outline-primary" style="width: 100%;" th:onclick="|location.href='@{/moveRegisterFrom}'|">REGISTER</button>
+								</div>
 	                        </form>
 	                        
 	                        

@@ -9,5 +9,7 @@ class ScardyBlogApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	
+	
 
 }
