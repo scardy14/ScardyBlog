@@ -49,10 +49,7 @@ INSERT INTO BOARD VALUES(board_seq.nextval, '테스트 카테고리', '테스트
 
 SELECT * FROM board;
 
-SELECT *
-FROM board where rownum <=2 AND category='테스트 카테고리';
+SELECT * FROM account;
 
-SELECT *
-FROM board
-ORDER BY post_date DESC
-FETCH FIRST 5 ROWS ONLY;
+
+UPDATE account SET tel='01063462516' WHERE id = 'scardy'
