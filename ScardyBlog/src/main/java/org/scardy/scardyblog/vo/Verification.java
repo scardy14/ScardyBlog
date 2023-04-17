@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Verification {
-	private static Verification verificationInstance;
+	private static Verification verificationInstance = new Verification();
 	private int verificationCode;
 	private boolean verificated = false;
 	private boolean checkTel = false;
@@ -17,7 +17,6 @@ public class Verification {
 	private boolean checkNickName = false;
 	
 	private Verification() {
-		System.out.println("instance");
 	}
 	public static Verification getVerificationInstance() {
 		return verificationInstance;

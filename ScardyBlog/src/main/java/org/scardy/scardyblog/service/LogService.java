@@ -1,5 +1,7 @@
 package org.scardy.scardyblog.service;
 
+import org.scardy.scardyblog.entity.Account;
+
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 
 public interface LogService {
@@ -14,6 +16,14 @@ public interface LogService {
 	public boolean existsById(String id);
 	
 	public boolean existsByTel(String tel);
+
+	public boolean existsByNickName(String nickname);
+
+	public void setPasswordCheck(boolean result);
+
+	public boolean checkVerification();
+
+	public boolean register(Account account);
 	
 	
 

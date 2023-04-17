@@ -6,8 +6,9 @@ CREATE TABLE account (
 	nickname	varchar2(100)	NOT NULL
 );
 
+CREATE SEQUENCE board_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE board (
-	post_No	number	NOT NULL,
+	post_No	number NOT NULL,
 	category	varchar2(100)	NOT NULL,
 	title	varchar2(100)	NOT NULL,
 	content	clob	NOT NULL,
@@ -39,11 +40,41 @@ ALTER TABLE grade ADD CONSTRAINT FK_account_TO_grade_1 FOREIGN KEY (
 REFERENCES account (
 	id
 );
+
+CREATE SEQUENCE category_seq START WITH 1 INCREMENT BY 1;
+CREATE TABLE category (
+    seq NUMBER PRIMARY KEY,
+    category VARCHAR2(100) NOT NULL
+);
+CREATE TRIGGER category_trigger
+BEFORE INSERT ON category
+FOR EACH ROW
+BEGIN
+    SELECT category_seq.NEXTVAL INTO :new.seq FROM dual;
+    
+    
+ALTER TABLE category ADD CONSTRAINT PK_category PRIMARY KEY (
+	seq
+);
+
+ALTER TABLE category ADD CONSTRAINT UK_category UNIQUE (
+	category
+);
+
+ALTER TABLE board ADD CONSTRAINT FK_category FOREIGN KEY(category) REFERENCES category (category);
+
+
+
+
+
+
+
+
 INSERT INTO account VALUES('scardy','blackmusicnote14','010-6346-2516','홍주영','scardy');
 
 INSERT INTO grade VALUES('scardy','MASTER');
 
-CREATE SEQUENCE board_seq START WITH 1 INCREMENT BY 1;
+;
 
 INSERT INTO BOARD VALUES(board_seq.nextval, '테스트 카테고리', '테스트 타이틀', '테스트 컨텐츠', 'scardy',sysdate,sysdate);
 
@@ -53,3 +84,5 @@ SELECT * FROM account;
 
 
 UPDATE account SET tel='01063462516' WHERE id = 'scardy'
+
+DELETE FROM ACCOUNT WHERE id = 'scardy'

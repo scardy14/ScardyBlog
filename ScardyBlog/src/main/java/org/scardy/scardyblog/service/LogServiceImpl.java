@@ -2,6 +2,7 @@ package org.scardy.scardyblog.service;
 
 import java.util.Random;
 
+import org.scardy.scardyblog.entity.Account;
 import org.scardy.scardyblog.repository.AccountRepository;
 import org.scardy.scardyblog.vo.Verification;
 import org.springframework.stereotype.Service;
@@ -69,10 +70,38 @@ public class LogServiceImpl implements LogService{
 	@Override
 	public boolean setExistsByTel(String tel) {
 		boolean result = accountRepository.existsByTel(tel);
-		if(!result) {
-			verification.setCheckTel(true);
+		verification.setCheckTel(!result);
+		return result;
+	}
+	@Override
+	public boolean existsByNickName(String nickname) {
+		boolean result = accountRepository.existsByNickname(nickname);
+		verification.setCheckNickName(!result);
+		return result;
+	}
+	@Override
+	public void setPasswordCheck(boolean result) {
+		verification.setCheckPw(result);
+		
+	}
+	@Override
+	public boolean checkVerification() {
+		boolean result = false;
+		if(verification.isCheckId()&&verification.isCheckNickName()&&verification.isCheckPw()&&verification.isCheckTel()&&verification.isVerificated()) {
+			result = true;
 		} else {
-			verification.setCheckTel(false);
+			result = false;
+		}
+		return result;
+	}
+	@Override
+	public boolean register(Account account) {
+		boolean result = false;
+		try {
+			accountRepository.save(account);
+			result = true;
+		} catch (Exception e) {
+			result = false;
 		}
 		return result;
 	}

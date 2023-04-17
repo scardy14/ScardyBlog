@@ -2,8 +2,10 @@ package org.scardy.scardyblog.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.scardy.scardyblog.service.BlogService;
+import org.scardy.scardyblog.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MoveController{
 	private final BlogService blogService;
+	private final CategoryService categoryService;
 	///////////////////////////////////////////////////////////////////////////
 	@GetMapping(value= {"/","/index","/home",""})
 	public String homeMove(Model model) {
@@ -25,9 +28,11 @@ public class MoveController{
 	///////////////////////////////////////////////////////////////////////////
 	@GetMapping("/moveBlog")
 	public String blogMove(Model model) {
-		model.addAttribute("javaList", blogService.findListByCategoryForBlog("java"));
-		model.addAttribute("springbootList", blogService.findListByCategoryForBlog("springboot"));
-		model.addAttribute("cssList", blogService.findListByCategoryForBlog("css"));
+		List<String> categoryList = categoryService.findAllCategory();
+		model.addAttribute("cList", categoryList);
+		for(String category : categoryList) {
+			model.addAttribute(category, blogService.findListByCategoryForBlog(category));
+		}
 		return "content/blog/blog";
 	}
 
@@ -92,6 +97,14 @@ public class MoveController{
 	@GetMapping("/moveRegisterFrom")
 	public String moveRegisterFrom() {
 		return "log/registerForm";
+	}
+	@GetMapping("/moveRegisterSuccess")
+	public String moveRegisterSuccess() {
+		return "log/registerSuccess";
+	}
+	@GetMapping("/moveRegisterFail")
+	public String moveRegisterFail() {
+		return "log/registerFail";
 	}
 	@GetMapping("/moveUpdateAccountForm")
 	public String moveUpdateAccountForm() {

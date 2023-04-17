@@ -14,6 +14,7 @@ import javax.sql.rowset.serial.SerialException;
 
 import org.scardy.scardyblog.entity.Board;
 import org.scardy.scardyblog.repository.BlogRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -100,7 +101,6 @@ public class BlogServiceImpl implements BlogService {
 	
 	@Override
 	public List<Board> findBlogPostList(String postNo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
