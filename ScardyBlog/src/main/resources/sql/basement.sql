@@ -46,13 +46,6 @@ CREATE TABLE category (
     seq NUMBER PRIMARY KEY,
     category VARCHAR2(100) NOT NULL
 );
-CREATE TRIGGER category_trigger
-BEFORE INSERT ON category
-FOR EACH ROW
-BEGIN
-    SELECT category_seq.NEXTVAL INTO :new.seq FROM dual;
-    
-    
 ALTER TABLE category ADD CONSTRAINT PK_category PRIMARY KEY (
 	seq
 );
@@ -82,6 +75,7 @@ SELECT * FROM board;
 
 SELECT * FROM account;
 
+SELECT * FROM category;
 
 UPDATE account SET tel='01063462516' WHERE id = 'scardy'
 

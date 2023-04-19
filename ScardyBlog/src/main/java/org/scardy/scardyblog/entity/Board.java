@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name="board")
 @AllArgsConstructor
 @NoArgsConstructor
-@SequenceGenerator(name = "seq_generator", sequenceName = "board_seq", allocationSize = 1)
+@SequenceGenerator(name = "board_seq", sequenceName = "board_seq", allocationSize = 1)
 public class Board {
 	@Column(name="post_No")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator")

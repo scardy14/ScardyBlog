@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.scardy.scardyblog.entity.Board;
+import org.scardy.scardyblog.entity.Category;
 
 public interface BlogService {
 	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail );
@@ -20,5 +21,7 @@ public interface BlogService {
 	public List<Board> findBlogPostList(String postNo);
 	
 	public List<Board> findListByCategoryForBlog(String category);
+
+	public String writeCategory(Category category);
 	
 }

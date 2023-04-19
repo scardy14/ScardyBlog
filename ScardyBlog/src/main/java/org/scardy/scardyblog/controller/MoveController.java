@@ -29,7 +29,7 @@ public class MoveController{
 	@GetMapping("/moveBlog")
 	public String blogMove(Model model) {
 		List<String> categoryList = categoryService.findAllCategory();
-		model.addAttribute("cList", categoryList);
+		model.addAttribute("categoryList", categoryList);
 		for(String category : categoryList) {
 			model.addAttribute(category, blogService.findListByCategoryForBlog(category));
 		}
@@ -67,9 +67,15 @@ public class MoveController{
 	public String moveWriteBlogFail() {
 		return "content/blog/writeblog-fail";
 	}
+	@GetMapping("/moveUpdateCategory")
+	public String moveUpdateCategory(Model model) {
+		List<String> categoryList = categoryService.findAllCategory();
+		model.addAttribute("categoryList", categoryList);
+		return "content/blog/updateCategory";
+	}
 	///////////////////////////////////////////////////////////////////////////
 	
-	
+	///////////////////////////////////////////////////////////////////////////
 	
 	
 	@GetMapping("moveAbout")

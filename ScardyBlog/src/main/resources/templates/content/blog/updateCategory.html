@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{main}">
+<head>
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<meta name="_csrf" th:content="${_csrf.token}">
+<title>Blog</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<div layout:fragment="content">
+	<div id="fh5co-main">
+		<table>
+			<thead>
+				<td></td><th></th>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	
+	
+		<div th:each="category:${categoryList}">
+			<div th:text = "${category}"></div>
+		</div>
+		<input type = "text" id = "newCategory"><button type = "button" id = "writeCategoryBtn">카테고리 추가</button>
+	</div>	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#writeCategoryBtn").click(function() {
+				var category = $("#newCategory").val();
+				var header = $("meta[name='_csrf_header']").attr('content');
+				var token = $("meta[name='_csrf']").attr('content');
+				alert(category);
+				 $.ajax({
+		               type: "post",
+		               url: "writeCategory",
+		               data: {category: category},
+		               beforeSend: function(xhr){
+		                   xhr.setRequestHeader(header, token);
+		               },
+		               success: function(data) {
+		            	   if(data=="success") {
+		            		   alert("카테고리 등록");
+		            	   } else {
+		            		   
+		            	   }
+		            	   
+		               },
+		               error: function(jqXHR, textStatus, errorThrown) {
+		            	   alert("카테고리 등록실패: "+ textStatus);
+		                   console.log(textStatus, errorThrown);
+		               }
+				});
+			})
+		});
+			
+	</script>
+</div>

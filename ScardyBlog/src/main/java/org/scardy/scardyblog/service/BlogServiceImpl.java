@@ -13,7 +13,9 @@ import javax.sql.rowset.serial.SerialClob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.scardy.scardyblog.entity.Board;
+import org.scardy.scardyblog.entity.Category;
 import org.scardy.scardyblog.repository.BlogRepository;
+import org.scardy.scardyblog.repository.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BlogServiceImpl implements BlogService {
 	private final BlogRepository blogRepository;
+	private final CategoryRepository categoryRepository;
 
 	@Transactional
 	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail ) {
@@ -102,6 +105,18 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public List<Board> findBlogPostList(String postNo) {
 		return null;
+	}
+
+	@Override
+	public String writeCategory(Category category) {
+		String result;
+		try {
+			categoryRepository.save(category);
+			result = "success";
+		} catch (Exception e) {
+			result = e.toString();
+		}
+		return result;
 	}
 
 	

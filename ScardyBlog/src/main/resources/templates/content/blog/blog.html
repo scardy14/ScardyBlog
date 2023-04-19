@@ -11,11 +11,31 @@
 	<div id="fh5co-main">
 		<div class="fh5co-narrow-content">
 		
-		<div th:each="board:${cList}">
+		<div th:each="category:${categoryList}">
 			<h2 class="fh5co-heading animate-box"
 				data-animate-effect="fadeInLeft">
-				<a href=# th:href="@{/moveBlogMode(blogMode=java)}" th:text="${}">Java-></a>
+				<a href=# th:href="@{/moveBlogMode(blogMode=java)}" th:text="${category}"></a>
 			</h2>
+			<div class="row row-bottom-padded-md">
+				<div th:each="board:${category}">
+					<div class="col-md-3 col-sm-6 col-padding animate-box"
+						data-animate-effect="fadeInLeft">
+						<div class="blog-entry">
+							<a th:href="@{/moveBlogDetail(postNo=${board.postNo})}" class="blog-img" style="height: 250px;">
+								<img th:src="@{data:image/png;base64,} + ${board.thumbnail}" class="img-responsive" alt="">
+							</a>
+							<div class="desc">
+								<h3>
+									<a th:href="@{/moveBlogDetail(postNo=${board.postNo})}" th:text="${board.title}">title</a>
+								</h3>
+								<span><small>by </small><small th:text="${board.id}">id</small></span>
+								<a th:href="@{/moveBlogDetail(postNo=${board.postNo})}" class="lead">Read More <i
+									class="icon-arrow-right3"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		
@@ -103,6 +123,9 @@
 			</div>
 			<div style="text-align: right;" sec:authorize="hasAuthority('MASTER')">
 				<button type="button" th:onclick="moveWriteBlogForm()" th:text="글쓰기"></button>
+			</div>
+			<div style="text-align: right;" sec:authorize="hasAuthority('MASTER')">
+				<button type="button" th:onclick="|location.href='@{/moveUpdateCategory}'|" th:text="카테고리수정"></button>
 			</div>
 		</div>
 	</div>
