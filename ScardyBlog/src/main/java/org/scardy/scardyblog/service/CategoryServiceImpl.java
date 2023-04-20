@@ -15,7 +15,7 @@ public class CategoryServiceImpl implements CategoryService{
 	private final CategoryRepository categoryRepository;
 	@Override
 	public List<String> findAllCategory() {
-		List<Category> cList = categoryRepository.findAll();
+		List<Category> cList = categoryRepository.findAll();	
 		List<String> sList = new ArrayList<>();
 		for(Category category: cList) {
 			sList.add(category.getCategory());

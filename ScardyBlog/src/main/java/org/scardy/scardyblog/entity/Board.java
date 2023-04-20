@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @SequenceGenerator(name = "board_seq", sequenceName = "board_seq", allocationSize = 1)
 public class Board {
 	@Column(name="post_No")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_generator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq")
 	@Id
 	private int postNo;
 	@Column

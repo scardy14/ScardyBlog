@@ -2,8 +2,11 @@ package org.scardy.scardyblog.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.scardy.scardyblog.entity.Board;
 import org.scardy.scardyblog.service.BlogService;
 import org.scardy.scardyblog.service.CategoryService;
 import org.springframework.stereotype.Controller;
@@ -28,11 +31,13 @@ public class MoveController{
 	///////////////////////////////////////////////////////////////////////////
 	@GetMapping("/moveBlog")
 	public String blogMove(Model model) {
+		HashMap<String, List<Board>> hashMap = new HashMap<String, List<Board>>();
 		List<String> categoryList = categoryService.findAllCategory();
 		model.addAttribute("categoryList", categoryList);
 		for(String category : categoryList) {
-			model.addAttribute(category, blogService.findListByCategoryForBlog(category));
+			hashMap.put(category, blogService.findListByCategoryForBlog(category));
 		}
+		model.addAttribute("hashMap", hashMap);
 		return "content/blog/blog";
 	}
 
@@ -47,7 +52,6 @@ public class MoveController{
 		try {
 			model.addAttribute("board",blogService.findBlogPostInfoDetail(postNo));
 			model.addAttribute("content",blogService.findBlogPostContentDetail(postNo).toString());
-			System.out.println(blogService.findBlogPostContentDetail(postNo).toString());
 			path = "content/blog/blogDetail";
 		} catch (SQLException | IOException e) {
 			path = "content/blog/blogDetail-fail";
@@ -56,7 +60,9 @@ public class MoveController{
 		return path;
 	}
 	@GetMapping("/moveWriteBlogForm")
-	public String moveWriteBlogForm() {
+	public String moveWriteBlogForm(Model model) {
+		List<String> cList = categoryService.findAllCategory();
+		model.addAttribute("cList",cList);
 		return "content/blog/writeBlogForm";
 	}
 	@GetMapping("/moveWriteBlogSuccess")

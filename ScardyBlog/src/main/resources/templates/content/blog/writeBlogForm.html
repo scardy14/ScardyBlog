@@ -16,8 +16,7 @@
 	<div id="fh5co-main" style="text-align: center;">
 	    <form method="post" th:action="@{/writeBlogPost}">
 	    	<select name = "category" class="textareacategory" style="vertical-align: top;">
-	    		<option value="java">java</option>
-	    		<option value="css">css</option>
+	    		<option th:each="category : ${cList}" th:value="${category}" th:text="${category}"></option>
 	    	</select>&nbsp;&nbsp;
 	    	<textarea name = "title" placeholder="제목" class="textareatitle">제목</textarea><br>
 	    	<div  style="padding-left: 10%; color: whitesmoke; background-color: whitesmoke;"><textarea  name = "content" id="editor">Hello, World!</textarea></div>
@@ -25,8 +24,6 @@
 	        <input type = "hidden" id="thumbnail" th:value = "sc" name = "thumbnail">
 	        <button type="submit" id="save">게시글 저장</button>
 	    </form>
-	    
-    <div>123124124124124</div>
     </div>
     
     
