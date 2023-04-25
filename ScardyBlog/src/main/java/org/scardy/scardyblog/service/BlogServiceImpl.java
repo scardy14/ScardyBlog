@@ -99,20 +99,15 @@ public class BlogServiceImpl implements BlogService {
 
 
 	@Override
-	public List<Blog> findListByCategoryForBlog(String category) {
+	public List<Blog> findListByCategory4(String category) {
 		List<Blog> boardList= blogRepository.findListByCategoryForBlog(category);
 		return boardList;
 	}
 
 	@Override
-	public List<Blog> findListByCategoryForBlogMode(String category) {
+	public List<Blog> findListByCategoryAll(String category) {
 		List<Blog> boardList= blogRepository.findListByCategoryForBlogMode(category);
 		return boardList;
-	}
-	
-	@Override
-	public List<Blog> findBlogPostList(String postNo) {
-		return null;
 	}
 
 	@Override

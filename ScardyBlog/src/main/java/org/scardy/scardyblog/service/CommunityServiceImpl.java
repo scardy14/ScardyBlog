@@ -8,7 +8,6 @@ import javax.sql.rowset.serial.SerialClob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.scardy.scardyblog.entity.Community;
-import org.scardy.scardyblog.repository.CategoryRepository;
 import org.scardy.scardyblog.repository.CommunityRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,22 +18,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CommunityServiceImpl implements CommunityService {
 	private final CommunityRepository communityRepository;
-	private final CategoryRepository categoryRepository;
 
 	@Transactional
-	public boolean wirteCommunityPost(String id, String category, String title, StringBuilder content, String thumbnail ) {
-		Community board = new Community();
-		board.setId(id);
-		board.setCategory(category);
-		board.setTitle(title);
-		board.setThumbnail(thumbnail);
+	public boolean wirteCommunityPost(String id, String title, StringBuilder content, String thumbnail ) {
+		Community community = new Community();
+		community.setId(id);
+		community.setTitle(title);
+		community.setThumbnail(thumbnail);
 		SerialClob clobContent;
 		try {
 			clobContent = new SerialClob(content.toString().toCharArray());
-			board.setContent(clobContent);
+			community.setContent(clobContent);
 			LocalDateTime now = LocalDateTime.now();
-			board.setPost_date(Date.valueOf(now.toLocalDate()));;
-			communityRepository.save(board);
+			community.setPost_date(Date.valueOf(now.toLocalDate()));;
+			communityRepository.save(community);
 		} catch (SerialException e) {
 			e.printStackTrace();
 			return false;

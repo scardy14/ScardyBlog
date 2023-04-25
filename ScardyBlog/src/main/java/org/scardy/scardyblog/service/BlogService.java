@@ -14,11 +14,9 @@ public interface BlogService {
 	
 	public StringBuilder findBlogContentByPostNo(int postNo) throws SQLException, IOException;
 	
-	public List<Blog> findListByCategoryForBlogMode(String category);
+	public List<Blog> findListByCategory4(String category);
 	
-	public List<Blog> findBlogPostList(String postNo);
-	
-	public List<Blog> findListByCategoryForBlog(String category);
+	public List<Blog> findListByCategoryAll(String category);
 	
 	public List<Blog> findListByRecent4();
 

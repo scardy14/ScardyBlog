@@ -36,7 +36,7 @@ public class MoveController{
 		List<String> categoryList = categoryService.findAllCategory();
 		model.addAttribute("categoryList", categoryList);
 		for(String category : categoryList) {
-			hashMap.put(category, blogService.findListByCategoryForBlog(category));
+			hashMap.put(category, blogService.findListByCategory4(category));
 		}
 		model.addAttribute("hashMap", hashMap);
 		model.addAttribute("mode", "blog");
@@ -45,7 +45,7 @@ public class MoveController{
 
 	@GetMapping("/moveBlogMode")
 	public String blogJavaMove(String blogMode, Model model) throws IOException, SQLException {
-		model.addAttribute(blogMode+"List", blogService.findListByCategoryForBlogMode(blogMode));
+		model.addAttribute(blogMode+"List", blogService.findListByCategoryAll(blogMode));
 		return "content/blog/blogMode";
 	}
 	@GetMapping("/moveBlogDetail")

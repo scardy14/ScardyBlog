@@ -41,13 +41,7 @@ ALTER TABLE category ADD CONSTRAINT PK_category PRIMARY KEY (
 ALTER TABLE category ADD CONSTRAINT UK_category UNIQUE (
 	category
 );
-
-
-
-
-
-
-
+------------------------------------------------------------------
 CREATE SEQUENCE blog_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE blog (
 	post_No	number		NOT NULL,
@@ -79,6 +73,19 @@ ALTER TABLE blog ADD CONSTRAINT FK_category_TO_blog_1 FOREIGN KEY (
 
 
 
+
+CREATE SEQUENCE community_category_seq START WITH 1 INCREMENT BY 1;
+CREATE TABLE community_category (
+    seq NUMBER NOT NULL,
+    category VARCHAR2(100) NOT NULL
+);
+ALTER TABLE community_category ADD CONSTRAINT PK_community_category PRIMARY KEY (
+	seq
+);
+ALTER TABLE community_category ADD CONSTRAINT UK_community_category UNIQUE (
+	category
+);
+-----------------------------------------------------------------------
 CREATE SEQUENCE community_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE community (
 	post_No	number		NOT NULL,
@@ -99,11 +106,29 @@ ALTER TABLE community ADD CONSTRAINT FK_account_TO_community_1 FOREIGN KEY (
 ) REFERENCES account (
 	id
 );
+ALTER TABLE blog ADD CONSTRAINT FK_community_category FOREIGN KEY (
+	category
+) REFERENCES community_category (
+	category
+);
 
 
 
 
 
+
+CREATE SEQUENCE memo_category_seq START WITH 1 INCREMENT BY 1;
+CREATE TABLE memo_category (
+    seq NUMBER NOT NULL,
+    category VARCHAR2(100) NOT NULL
+);
+ALTER TABLE memo_category ADD CONSTRAINT PK_memo_category PRIMARY KEY (
+	seq
+);
+ALTER TABLE memo_category ADD CONSTRAINT UK_memo_category UNIQUE (
+	category
+);
+-----------------------------------------------------------------------
 CREATE SEQUENCE memo_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE memo (
 	post_No	number		NOT NULL,
@@ -124,7 +149,11 @@ ALTER TABLE memo ADD CONSTRAINT FK_account_TO_memo_1 FOREIGN KEY (
 ) REFERENCES account (
 	id
 );
-
+ALTER TABLE blog ADD CONSTRAINT FK_memo_category FOREIGN KEY (
+	category
+) REFERENCES memo_category (
+	category
+);
 
 
 

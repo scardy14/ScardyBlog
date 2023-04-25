@@ -8,7 +8,7 @@ import org.scardy.scardyblog.entity.Category;
 import org.scardy.scardyblog.entity.Community;
 
 public interface CommunityService {
-	public boolean wirteCommunityPost(String id, String category, String title, StringBuilder content, String thumbnail );
+	public boolean wirteCommunityPost(String id, String title, StringBuilder content, String thumbnail );
 	
 
 	
