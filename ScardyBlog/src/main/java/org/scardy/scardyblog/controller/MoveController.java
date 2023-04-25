@@ -52,8 +52,8 @@ public class MoveController{
 	public String moveBlogDetail(Model model, int postNo) {
 		String path;
 		try {
-			model.addAttribute("board",blogService.findBlogPostInfoDetail(postNo));
-			model.addAttribute("content",blogService.findBlogPostContentDetail(postNo).toString());
+			model.addAttribute("board",blogService.findBlogInfoByPostNo(postNo));
+			model.addAttribute("content",blogService.findBlogContentByPostNo(postNo).toString());
 			path = "content/blog/blogDetail";
 		} catch (SQLException | IOException e) {
 			path = "content/blog/blogDetail-fail";
@@ -79,6 +79,10 @@ public class MoveController{
 	public String moveUpdateCategory(Model model) {
 		List<String> categoryList = categoryService.findAllCategory();
 		model.addAttribute("categoryList", categoryList);
+		return "content/blog/updateCategory";
+	}
+	@GetMapping("/moveUpdateBlog")
+	public String moveUpdateBlog(Model model, int postNo) {
 		return "content/blog/updateCategory";
 	}
 	///////////////////////////////////////////////////////////////////////////

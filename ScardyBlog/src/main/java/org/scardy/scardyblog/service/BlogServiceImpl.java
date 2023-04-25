@@ -18,6 +18,7 @@ import org.scardy.scardyblog.repository.BlogRepository;
 import org.scardy.scardyblog.repository.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class BlogServiceImpl implements BlogService {
 	private final BlogRepository blogRepository;
 	private final CategoryRepository categoryRepository;
-
+	
 	@Transactional
 	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail ) {
 		Blog board = new Blog();
@@ -51,15 +52,26 @@ public class BlogServiceImpl implements BlogService {
 		}
 		return true;
 	}
-
+	
+	
 	@Override
-	public Blog findBlogPostInfoDetail(int postNo) throws SQLException, IOException {
-		Blog board = blogRepository.findById(postNo).get();
-		return board;
+	public Blog findBlogInfoByPostNo(int postNo) throws SQLException, IOException {
+		Blog d_blog = blogRepository.findById(postNo).get();
+		Blog blog = new Blog(
+				d_blog.getPostNo(),
+				d_blog.getCategory(),
+				d_blog.getTitle(),
+				d_blog.getId(),
+				d_blog.getPost_date(),
+				d_blog.getUpdate_date(),
+				d_blog.getThumbnail()				
+				);
+		;
+		return blog;
 	}
 	
 	@Override
-	public StringBuilder findBlogPostContentDetail(int postNo) throws SQLException, IOException {
+	public StringBuilder findBlogContentByPostNo(int postNo) throws SQLException, IOException {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//CLOB(텍스트데이터)->getCharacterStream(변환기)->finder(문자의 stream, 글자 하나하나가 여러개있음)->Bufferedfinder(변환기)->String or StringBuilder(문자열)
 		//우리가 일반적으로 사용하는건 문자'열'로써 문장으로써 사용된다. finder은 문자를 return하므로 이를 모아서 문자열로써 만드는 작업이 필요하다
@@ -84,13 +96,9 @@ public class BlogServiceImpl implements BlogService {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		return contentStringBuilder;
 	}
-	/*
+
+
 	@Override
-	public List<Board> findBlogPostListByCategoryForBlog(String category) {
-		blogRepository.findByCategoryForBlog(category);
-		return null;
-	}
-*/	@Override
 	public List<Blog> findListByCategoryForBlog(String category) {
 		List<Blog> boardList= blogRepository.findListByCategoryForBlog(category);
 		return boardList;
@@ -124,6 +132,10 @@ public class BlogServiceImpl implements BlogService {
 		List<Blog> list = blogRepository.findListByRecent4();
 		return list;
 	}
+
+
+
+	
 
 	
 

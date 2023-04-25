@@ -10,11 +10,9 @@ import org.scardy.scardyblog.entity.Category;
 public interface BlogService {
 	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail );
 	
-	public Blog findBlogPostInfoDetail(int postNo) throws SQLException, IOException;
+	public Blog findBlogInfoByPostNo(int postNo) throws SQLException, IOException;
 	
-	public StringBuilder findBlogPostContentDetail(int postNo) throws SQLException, IOException;
-	
-	//public List<Board> findBlogPostListByCategoryForBlog(String category);
+	public StringBuilder findBlogContentByPostNo(int postNo) throws SQLException, IOException;
 	
 	public List<Blog> findListByCategoryForBlogMode(String category);
 	
