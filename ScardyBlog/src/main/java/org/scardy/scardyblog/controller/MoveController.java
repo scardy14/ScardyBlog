@@ -4,9 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.scardy.scardyblog.entity.Board;
+import org.scardy.scardyblog.entity.Blog;
 import org.scardy.scardyblog.service.BlogService;
 import org.scardy.scardyblog.service.CategoryService;
 import org.springframework.stereotype.Controller;
@@ -24,6 +23,8 @@ public class MoveController{
 	@GetMapping(value= {"/","/index","/home",""})
 	public String homeMove(Model model) {
 		model.addAttribute("mode", "home");
+		List<Blog> list = blogService.findListByRecent4();
+		model.addAttribute("recentList", list);
 		return "content/index";
 	}
 	///////////////////////////////////////////////////////////////////////////
@@ -31,13 +32,14 @@ public class MoveController{
 	///////////////////////////////////////////////////////////////////////////
 	@GetMapping("/moveBlog")
 	public String blogMove(Model model) {
-		HashMap<String, List<Board>> hashMap = new HashMap<String, List<Board>>();
+		HashMap<String, List<Blog>> hashMap = new HashMap<String, List<Blog>>();
 		List<String> categoryList = categoryService.findAllCategory();
 		model.addAttribute("categoryList", categoryList);
 		for(String category : categoryList) {
 			hashMap.put(category, blogService.findListByCategoryForBlog(category));
 		}
 		model.addAttribute("hashMap", hashMap);
+		model.addAttribute("mode", "blog");
 		return "content/blog/blog";
 	}
 
@@ -84,26 +86,31 @@ public class MoveController{
 	///////////////////////////////////////////////////////////////////////////
 	
 	
-	@GetMapping("moveAbout")
+	@GetMapping("/moveAbout")
 	public String aboutMove(Model model) {
-		model.addAttribute("mode", "about");
+		model.addAttribute("mode", "abount");
 		return "content/about";
 	}
-	@GetMapping("movePortfolio")
-	public String portfolioMove(Model model) {
-		model.addAttribute("mode", "portfolio");
-		return "content/portfolio";
+	@GetMapping("/moveMemo")
+	public String moveMemo(Model model) {
+		model.addAttribute("mode", "memo");
+		return "content/memo";
 	}
-	@GetMapping("moveContact")
-	public String contactMove(Model model) {
-		model.addAttribute("mode", "contact");
-		return "content/contact";
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	///////////////////////////////////////////////////////////////////////////
+	@GetMapping("/moveCommunity")
+	public String moveCommunity(Model model) {
+		model.addAttribute("mode", "community");
+		return "content/community";
 	}
+	///////////////////////////////////////////////////////////////////////////
 	
 	///////////////////////////////////////////////////////////////////////////
 	@GetMapping("/moveLogin")
 	public String loginMove(Model model) {
-		model.addAttribute("mode", "login");
+		model.addAttribute("mode", "log");
 		return "log/login";
 	}
 	@GetMapping("/moveRegisterFrom")

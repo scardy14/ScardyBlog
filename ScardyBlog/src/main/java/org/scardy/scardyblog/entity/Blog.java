@@ -19,13 +19,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="board")
+@Table(name="blog")
 @AllArgsConstructor
 @NoArgsConstructor
-@SequenceGenerator(name = "board_seq", sequenceName = "board_seq", allocationSize = 1)
-public class Board {
+@SequenceGenerator(name = "blog_seq", sequenceName = "blog_seq", allocationSize = 1)
+public class Blog {
 	@Column(name="post_No")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blog_seq")
 	@Id
 	private int postNo;
 	@Column
@@ -42,13 +42,15 @@ public class Board {
 	private Date update_date;
 	@Column
 	private String thumbnail;
-	public Board(String title, String id, Date post_date, String thumbnail) {
+	public Blog(String title, String id, Date post_date, String thumbnail) {
 		super();
 		this.title = title;
 		this.id = id;
 		this.post_date = post_date;
 		this.thumbnail = thumbnail;
 	}
+	@Column
+	private String status = "visible";
 	
 	
 }

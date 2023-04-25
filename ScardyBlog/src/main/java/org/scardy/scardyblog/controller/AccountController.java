@@ -1,7 +1,7 @@
 package org.scardy.scardyblog.controller;
 
 import org.scardy.scardyblog.entity.Account;
-import org.scardy.scardyblog.service.GradeService;
+import org.scardy.scardyblog.service.AuthorityService;
 import org.scardy.scardyblog.service.LogService;
 import org.scardy.scardyblog.vo.Verification;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolverSupport;
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountController{
 	private final LogService logService;
-	private final GradeService gradeService;
+	private final AuthorityService gradeService;
 	
 	@GetMapping("/sendMassage")
 	@ResponseBody

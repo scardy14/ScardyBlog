@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.scardy.scardyblog.entity.Account;
-import org.scardy.scardyblog.entity.Grade;
+import org.scardy.scardyblog.entity.Authority;
 import org.scardy.scardyblog.repository.AccountRepository;
-import org.scardy.scardyblog.repository.GradeRepository;
+import org.scardy.scardyblog.repository.AuthorityRepository;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberAuthenticationProvider implements AuthenticationProvider{	
 	private final AccountRepository accountRepository;
-	private final GradeRepository gradeRepository;
-	//private final BCryptPasswordEncoder passwordEncoder;
+	private final AuthorityRepository authorityRepository;
+	private final BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {		
@@ -39,33 +40,27 @@ public class MemberAuthenticationProvider implements AuthenticationProvider{
 		String password=(String) authentication.getCredentials();//사용자가 입력한 패스워드 반환
 		
 		Optional<Account> accountOptional = accountRepository.findById(id);
-		Account account = accountOptional.get();
-		if(account == null){
+		if(accountOptional.isEmpty()){
 			System.out.println("회원아이디가 없습니다.");
 			throw new UsernameNotFoundException("회원 아이디가 존재하지 않습니다");
 			
 		}
+		Account account = accountOptional.get();
 		
-		/*
-        if (passwordEncoder.matches(password, account.getPassword())) {//! 비밀번호가 일치하지 않으면  
-            System.out.println("비번불일치");    
+		
+        if (!passwordEncoder.matches(password, account.getPassword())) {//! 비밀번호가 일치하지 않으면   
         	throw new BadCredentialsException("비밀번호가 일치하지 않습니다");
                 
         }
-        */
-		if (!password.equals(account.getPassword())) {//! 비밀번호가 일치하지 않으면  
-        	throw new BadCredentialsException("비밀번호가 일치하지 않습니다");
-                
-        }
-		
+        
 		//4.사용자 권한 조회
-        Optional<Grade> gradeOptional = gradeRepository.findById(id);
-        Grade grade = gradeOptional.get();
+        Optional<Authority> gradeOptional = authorityRepository.findById(id);
+        Authority authority = gradeOptional.get();
         
         
         
         List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(grade.getGrade()));
+        authorities.add(new SimpleGrantedAuthority(authority.getGrade()));
 		Authentication auth = new UsernamePasswordAuthenticationToken(id, password, authorities);
 		return auth;		
 	}

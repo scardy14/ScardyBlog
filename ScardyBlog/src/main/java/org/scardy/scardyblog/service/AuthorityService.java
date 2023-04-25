@@ -1,6 +1,6 @@
 package org.scardy.scardyblog.service;
 
-public interface GradeService {
+public interface AuthorityService {
 	public boolean register(String id);
 
 }

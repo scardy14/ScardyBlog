@@ -27,11 +27,11 @@
 	                        <form th:action="@{/login}"   action="/login" method="post" id="loginForm" sec:authorize="isAnonymous()">
 	                            <div class="form-group">
 	                                <label class="form-control-label" >ID</label>
-	                                <input type="text"  name="username"class="form-control">
+	                                <input type="text"  name="username"class="form-control" required="required">
 	                            </div>
 	                            <div class="form-group">
 	                                <label class="form-control-label">PASSWORD</label>
-	                                <input type="password"  name="password"class="form-control">
+	                                <input type="password"  name="password"class="form-control" required="required">
 	                            </div>
 								<div class="logout-button">
 									<button type="submit" class="btn btn-outline-primary" style="width: 100%;">LOGIN</button>
@@ -53,10 +53,7 @@
 								</form>
 								<br><br><br>
 								<a th:href="@{/moveUpdateAccountForm}" style="float: left; padding-left: 20%;">회원정보수정</a>
-								<a th:href="@{/enterCafe}" style="float: right; padding-right: 20%;">카페가기</a>
-								<!--/* 
-								         sec:authorize="hasRole('ROLE_ADMIN')" 을 이용해  ROLE_ADMIN 권한이 있을 때만 보이도록 한다 
-								   */-->
+								<a th:href="@{/moveDeleteAccountForm}" style="float: right; padding-right: 20%;">회원탈퇴</a>
 								<a th:href="@{/admin/main}" sec:authorize="hasRole('MASTER')">관리자모드</a><br>	
 							</th:block>
 	                        </div>

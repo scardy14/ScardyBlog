@@ -36,7 +36,6 @@ public class BlogController {
 	@ResponseBody
 	public String writeCategory(@RequestParam("category") String category, Model model) {
 		Category E_category = new Category(category);
-		System.out.println(category);
 		String result =  blogService.writeCategory(E_category);
 		return result;
 	}

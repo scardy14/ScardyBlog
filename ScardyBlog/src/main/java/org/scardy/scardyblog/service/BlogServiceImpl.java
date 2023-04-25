@@ -12,7 +12,7 @@ import java.util.List;
 import javax.sql.rowset.serial.SerialClob;
 import javax.sql.rowset.serial.SerialException;
 
-import org.scardy.scardyblog.entity.Board;
+import org.scardy.scardyblog.entity.Blog;
 import org.scardy.scardyblog.entity.Category;
 import org.scardy.scardyblog.repository.BlogRepository;
 import org.scardy.scardyblog.repository.CategoryRepository;
@@ -30,7 +30,7 @@ public class BlogServiceImpl implements BlogService {
 
 	@Transactional
 	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail ) {
-		Board board = new Board();
+		Blog board = new Blog();
 		board.setId(id);
 		board.setCategory(category);
 		board.setTitle(title);
@@ -53,8 +53,8 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public Board findBlogPostInfoDetail(int postNo) throws SQLException, IOException {
-		Board board = blogRepository.findById(postNo).get();
+	public Blog findBlogPostInfoDetail(int postNo) throws SQLException, IOException {
+		Blog board = blogRepository.findById(postNo).get();
 		return board;
 	}
 	
@@ -91,19 +91,19 @@ public class BlogServiceImpl implements BlogService {
 		return null;
 	}
 */	@Override
-	public List<Board> findListByCategoryForBlog(String category) {
-		List<Board> boardList= blogRepository.findListByCategoryForBlog(category);
+	public List<Blog> findListByCategoryForBlog(String category) {
+		List<Blog> boardList= blogRepository.findListByCategoryForBlog(category);
 		return boardList;
 	}
 
 	@Override
-	public List<Board> findListByCategoryForBlogMode(String category) {
-		List<Board> boardList= blogRepository.findListByCategoryForBlogMode(category);
+	public List<Blog> findListByCategoryForBlogMode(String category) {
+		List<Blog> boardList= blogRepository.findListByCategoryForBlogMode(category);
 		return boardList;
 	}
 	
 	@Override
-	public List<Board> findBlogPostList(String postNo) {
+	public List<Blog> findBlogPostList(String postNo) {
 		return null;
 	}
 
@@ -117,6 +117,12 @@ public class BlogServiceImpl implements BlogService {
 			result = e.toString();
 		}
 		return result;
+	}
+
+	@Override
+	public List<Blog> findListByRecent4() {
+		List<Blog> list = blogRepository.findListByRecent4();
+		return list;
 	}
 
 	

@@ -1,21 +1,21 @@
 package org.scardy.scardyblog.service;
 
-import org.scardy.scardyblog.entity.Grade;
-import org.scardy.scardyblog.repository.GradeRepository;
+import org.scardy.scardyblog.entity.Authority;
+import org.scardy.scardyblog.repository.AuthorityRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class GradeServiceImpl implements GradeService{
-	private final GradeRepository gradeRepository;
+public class AuthorityServiceImpl implements AuthorityService{
+	private final AuthorityRepository authorityRepository;
 	@Override
 	public boolean register(String id) {
-		Grade grade= new Grade(id, "normal");
+		Authority grade= new Authority(id, "normal");
 		boolean result=false;
 		try {
-			gradeRepository.save(grade);
+			authorityRepository.save(grade);
 			result = true;
 		} catch (Exception e) {
 			result = false;

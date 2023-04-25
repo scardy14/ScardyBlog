@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="grade")
+@Table(name="authority")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Grade implements Serializable {
+public class Authority implements Serializable {
 	private static final long serialVersionUID = -7679094053339103491L;
 	@Column(name="id")
 	@Id

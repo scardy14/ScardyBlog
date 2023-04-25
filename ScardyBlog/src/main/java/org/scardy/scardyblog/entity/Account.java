@@ -25,4 +25,6 @@ public class Account{
 	private String name;
 	@Column
 	private String nickname;
+	@Column
+	private String status = "NORMAL";
 }

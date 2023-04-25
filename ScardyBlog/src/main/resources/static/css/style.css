@@ -18,7 +18,7 @@ body {
   line-height: 1.6;
   color: rgba(0, 0, 0, 0.5);
  /*  background: whitesmoke; */
-  background: whitesmoke;
+  background: #fefefe;
 }
 @media screen and (max-width: 992px) {
   body {
@@ -1168,12 +1168,12 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 
 
 
-/*
-body {
+
+.loginbody {
     background: #222D32;
     font-family: 'Roboto', sans-serif;
 }
-*/
+
 
 
 .login-box {

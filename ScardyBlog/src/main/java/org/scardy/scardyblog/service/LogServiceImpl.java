@@ -5,6 +5,7 @@ import java.util.Random;
 import org.scardy.scardyblog.entity.Account;
 import org.scardy.scardyblog.repository.AccountRepository;
 import org.scardy.scardyblog.vo.Verification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class LogServiceImpl implements LogService{
 	private final DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("NCSKO8YI59EXNTER", "QMLBESR7DYZOFCJXNTNG90XJQD0BZOBH", "https://api.coolsms.co.kr");;
 	private final AccountRepository accountRepository;
 	private Verification verification = Verification.getVerificationInstance();
+	private final BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
 	public boolean existsById(String id) {
@@ -98,6 +100,7 @@ public class LogServiceImpl implements LogService{
 	public boolean register(Account account) {
 		boolean result = false;
 		try {
+			account.setPassword(passwordEncoder.encode(account.getPassword()));
 			accountRepository.save(account);
 			result = true;
 		} catch (Exception e) {
