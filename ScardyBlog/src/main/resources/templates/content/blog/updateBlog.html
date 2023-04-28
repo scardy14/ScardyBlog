@@ -14,84 +14,85 @@
 <div layout:fragment="content">
 	<br><br><br><br><br>
 	<div id="fh5co-main" style="text-align: center;">
-	    <form method="post" th:action="@{/writeBlogPost}">
+	    <form method="post" th:action="@{/updateBlogPost}" enctype="multipart/form-data">
 	    	<select name = "category" class="textareacategory" style="vertical-align: top;">
-	    		<option th:each="category : ${cList}" th:value="${category}" th:text="${category}"></option>
+	    		<option th:each="category : ${categoryList}" th:value="${category}" th:text="${category}"></option>
 	    	</select>&nbsp;&nbsp;
-	    	<textarea name = "title" placeholder="제목" class="textareatitle">제목</textarea><br>
-	    	<div  style="padding-left: 10%; color: whitesmoke; background-color: whitesmoke;"><textarea  name = "content" id="editor">Hello, World!</textarea></div>
+	    	<textarea name = "title" placeholder="제목" class="textareatitle" th:text="${board.getTitle()}">제목</textarea><br>
+	    	<div style="padding-left: 8%;"><textarea  name = "content" id="editor" th:utext="${content}">내용</textarea></div>
+	        <br>
+	        <br>
 	        <input type = "hidden" name = "id" th:value="${#authentication.getName()}">
-	        <input type = "hidden" id="thumbnail" th:value = "sc" name = "thumbnail">
-	        <br>
-	        <br>
+	        <input type = "hidden" id="thumbnail" th:value = "empty" name = "thumbnail">
+	        <input type = "hidden" name = "postNo" th:value = "${board.postNo}">
 	        <button type="submit" id="save" class="btn btn-outline-primary">게시글 저장</button>
 	    </form>
     </div>
     
     
     <script>    
-$(function(){
-    var plugins = [
-        "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor",
-        "searchreplace", "visualblocks", "code", "insertdatetime", "media", "table",
-        "paste", "code", "help", "wordcount", "save", "autoresize"
-    ];
-    var edit_toolbar = 'formatselect fontselect fontsizeselect |'
-               + ' forecolor backcolor |'
-               + ' bold italic underline strikethrough |'
-               + ' alignjustify alignleft aligncenter alignright |'
-               + ' bullist numlist |'
-               + ' table tabledelete |'
-               + ' link image';
+    $(function(){
+        var plugins = [
+            "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor",
+            "searchreplace", "visualblocks", "code", "insertdatetime", "media", "table",
+            "paste", "code", "help", "wordcount", "save", "autoresize"
+        ];
+        var edit_toolbar = 'formatselect fontselect fontsizeselect |'
+                   + ' forecolor backcolor |'
+                   + ' bold italic underline strikethrough |'
+                   + ' alignjustify alignleft aligncenter alignright |'
+                   + ' bullist numlist |'
+                   + ' table tabledelete |'
+                   + ' link image';
 
-    tinymce.init({
-    	language: "ko_KR", //한글판으로 변경
-        selector: '#editor',
-        elementpath: false,
-        width: "89%", // width 값을 100%로 설정
-        statusbar: false,
-        //menubar: false,
-        plugins: plugins,
-        content_css: 'style.css',
-        toolbar: edit_toolbar,
-        toolbar_sticky: true, // 스크롤시 툴바 고정 여부
-        location: "folder/sub-folder/new-location.png",
-        //font_foramts: 'custom font name=origin font name, sub1, sub2...; other...;'
-        image_title: true,
-        automatic_uploads: true,
-        file_picker_types: 'image',
-        file_picker_callback: function (cb, value, meta) {
-            var input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
-            input.onchange = function () {
-                var file = this.files[0];
-                var reader = new FileReader();
-                reader.onload = function () {
-                    var id = 'blobid' + (new Date()).getTime();
-                    var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-                    var base64 = reader.result.split(',')[1];
-                    var blobInfo = blobCache.create(id, file, base64);
-                    document.getElementById('thumbnail').value = blobInfo.base64();
-                    blobCache.add(blobInfo);
-                    cb(blobInfo.blobUri(), { title: file.name });
+        tinymce.init({
+        	language: "ko_KR", //한글판으로 변경
+            selector: '#editor',
+            elementpath: false,
+            width: "91%",
+            statusbar: false,
+            //menubar: false,
+            plugins: plugins,
+            content_css: 'style.css',
+            toolbar: edit_toolbar,
+            toolbar_sticky: true, // 스크롤시 툴바 고정 여부
+            location: "folder/sub-folder/new-location.png",
+            //font_foramts: 'custom font name=origin font name, sub1, sub2...; other...;'
+            image_title: true,
+            automatic_uploads: true,
+            file_picker_types: 'image',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+                input.onchange = function () {
+                    var file = this.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        document.getElementById('thumbnail').value = blobInfo.base64();
+                        blobCache.add(blobInfo);
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+                    reader.readAsDataURL(file);
                 };
-                reader.readAsDataURL(file);
-            };
-            input.click();
-        },
-        /*** image upload ***/
+                input.click();
+            },
+            /*** image upload ***/
+            
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; background-color: white;}'
+        });
+
+
+
+        $("#save").on("click", function(){
+            var content = tinymce.activeEditor.getContent();
+            console.log(content);
+        });
         
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; background-color: whitesmoke;}'
     });
-
-
-
-    $("#save").on("click", function(){
-        var content = tinymce.activeEditor.getContent();
-        console.log(content);
-    });
-    
-});
 </script>
 </div>

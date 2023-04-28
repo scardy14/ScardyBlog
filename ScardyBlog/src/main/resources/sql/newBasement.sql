@@ -106,12 +106,11 @@ ALTER TABLE community ADD CONSTRAINT FK_account_TO_community_1 FOREIGN KEY (
 ) REFERENCES account (
 	id
 );
-ALTER TABLE blog ADD CONSTRAINT FK_community_category FOREIGN KEY (
+ALTER TABLE community ADD CONSTRAINT FK_community_category FOREIGN KEY (
 	category
 ) REFERENCES community_category (
 	category
 );
-
 
 
 
@@ -149,7 +148,7 @@ ALTER TABLE memo ADD CONSTRAINT FK_account_TO_memo_1 FOREIGN KEY (
 ) REFERENCES account (
 	id
 );
-ALTER TABLE blog ADD CONSTRAINT FK_memo_category FOREIGN KEY (
+ALTER TABLE memo ADD CONSTRAINT FK_memo_category FOREIGN KEY (
 	category
 ) REFERENCES memo_category (
 	category
@@ -160,7 +159,7 @@ ALTER TABLE blog ADD CONSTRAINT FK_memo_category FOREIGN KEY (
 
 
 
-
 SELECT * FROM account;
 SELECT * FROM authority;
+SELECT * FROM blog;
 

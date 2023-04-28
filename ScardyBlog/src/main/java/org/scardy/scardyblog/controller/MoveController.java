@@ -23,8 +23,7 @@ public class MoveController{
 	@GetMapping(value= {"/","/index","/home",""})
 	public String homeMove(Model model) {
 		model.addAttribute("mode", "home");
-		List<Blog> list = blogService.findListByRecent4();
-		model.addAttribute("recentList", list);
+		model.addAttribute("recentList", blogService.findListByRecent4());
 		return "content/index";
 	}
 	///////////////////////////////////////////////////////////////////////////
@@ -45,26 +44,23 @@ public class MoveController{
 
 	@GetMapping("/moveBlogMode")
 	public String blogJavaMove(String blogMode, Model model) throws IOException, SQLException {
-		model.addAttribute(blogMode+"List", blogService.findListByCategoryAll(blogMode));
+		model.addAttribute("list", blogService.findListByCategoryAll(blogMode));
 		return "content/blog/blogMode";
 	}
 	@GetMapping("/moveBlogDetail")
 	public String moveBlogDetail(Model model, int postNo) {
-		String path;
 		try {
 			model.addAttribute("board",blogService.findBlogInfoByPostNo(postNo));
 			model.addAttribute("content",blogService.findBlogContentByPostNo(postNo).toString());
-			path = "content/blog/blogDetail";
+			return "content/blog/blogDetail";
 		} catch (SQLException | IOException e) {
-			path = "content/blog/blogDetail-fail";
 			e.printStackTrace();
+			return "content/blog/blogDetail-fail";			
 		}
-		return path;
 	}
 	@GetMapping("/moveWriteBlogForm")
 	public String moveWriteBlogForm(Model model) {
-		List<String> cList = categoryService.findAllCategory();
-		model.addAttribute("cList",cList);
+		model.addAttribute("categoryList",categoryService.findAllCategory());
 		return "content/blog/writeBlogForm";
 	}
 	@GetMapping("/moveWriteBlogSuccess")
@@ -77,13 +73,20 @@ public class MoveController{
 	}
 	@GetMapping("/moveUpdateCategory")
 	public String moveUpdateCategory(Model model) {
-		List<String> categoryList = categoryService.findAllCategory();
-		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("categoryList", categoryService.findAllCategory());
 		return "content/blog/updateCategory";
 	}
 	@GetMapping("/moveUpdateBlog")
 	public String moveUpdateBlog(Model model, int postNo) {
-		return "content/blog/updateCategory";
+		try {
+			model.addAttribute("categoryList", categoryService.findAllCategory());
+			model.addAttribute("board",blogService.findBlogInfoByPostNo(postNo));
+			model.addAttribute("content",blogService.findBlogContentByPostNo(postNo).toString());
+			return "content/blog/updateBlog";
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+			return "content/blog/blogDetail-fail";	
+		}
 	}
 	///////////////////////////////////////////////////////////////////////////
 	

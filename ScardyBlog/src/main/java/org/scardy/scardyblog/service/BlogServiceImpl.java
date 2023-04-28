@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.Clob;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialClob;
@@ -16,9 +14,7 @@ import org.scardy.scardyblog.entity.Blog;
 import org.scardy.scardyblog.entity.Category;
 import org.scardy.scardyblog.repository.BlogRepository;
 import org.scardy.scardyblog.repository.CategoryRepository;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -30,32 +26,39 @@ public class BlogServiceImpl implements BlogService {
 	private final CategoryRepository categoryRepository;
 	
 	@Transactional
-	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail ) {
+	public void wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail ) throws SerialException, SQLException {
 		Blog board = new Blog();
 		board.setId(id);
 		board.setCategory(category);
 		board.setTitle(title);
 		board.setThumbnail(thumbnail);
 		SerialClob clobContent;
-		try {
-			clobContent = new SerialClob(content.toString().toCharArray());
-			board.setContent(clobContent);
-			LocalDateTime now = LocalDateTime.now();
-			board.setPost_date(Date.valueOf(now.toLocalDate()));;
-			blogRepository.save(board);
-		} catch (SerialException e) {
-			e.printStackTrace();
-			return false;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
+		clobContent = new SerialClob(content.toString().toCharArray());
+		board.setContent(clobContent);
+		blogRepository.save(board);
+	}
+	
+	@Transactional
+	public void updateBlogPost(String id, int postNo, String category, String title, StringBuilder content, String thumbnail ) throws SerialException, SQLException {
+		Blog board = new Blog();
+		board.setId(id);
+		board.setPostNo(postNo);
+		board.setCategory(category);
+		board.setTitle(title);
+		if(thumbnail.equals("empty")) {
+			board.setThumbnail(blogRepository.findById(postNo).get().getThumbnail());
+		} else {
+			board.setThumbnail(thumbnail);
 		}
-		return true;
+		SerialClob clobContent;
+		clobContent = new SerialClob(content.toString().toCharArray());
+		board.setContent(clobContent);
+		blogRepository.save(board);
 	}
 	
 	
 	@Override
-	public Blog findBlogInfoByPostNo(int postNo) throws SQLException, IOException {
+	public Blog findBlogInfoByPostNo(int postNo) {
 		Blog d_blog = blogRepository.findById(postNo).get();
 		Blog blog = new Blog(
 				d_blog.getPostNo(),
@@ -111,15 +114,8 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public String writeCategory(Category category) {
-		String result;
-		try {
-			categoryRepository.save(category);
-			result = "success";
-		} catch (Exception e) {
-			result = e.toString();
-		}
-		return result;
+	public void writeCategory(Category category) {
+		categoryRepository.save(category);
 	}
 
 	@Override

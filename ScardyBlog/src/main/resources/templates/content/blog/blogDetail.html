@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 	layout:decorate="~{main}">
 <head>
 <title>Blog</title>
@@ -8,13 +9,20 @@
 <div layout:fragment="content">
 <br>
 	<div id="fh5co-main">
-		<div style="padding-left: 10%;">
-			<textarea th:utext="${board.getTitle()}" class="textareatitleblog" readonly="readonly" >제목</textarea>
+		<div style="text-align: right; padding-right: 10%;">
 			<div th:text="@{작성자: } +${board.id}"></div>
-			<div th:utext="@{작성일:} +${board.getPost_date()}" style="padding-right: 10%;">작성일</div>
-			<div>수정일: </div><div th:utext="${board.getUpdate_date()}">수정일</div>
-			<textarea class="textareaunderline"></textarea>
+			<div th:text="@{작성일: } +${board.getPost_date()}">작성일</div>
+			<div th:text="@{수정일: } + ${board.getUpdate_date()}">수정일: </div>
+		</div>
+		<div style="padding-left: 10%;">
+			<textarea th:utext="[+${board.category}+]  +${board.getTitle()}" class="textareatitleblog" readonly="readonly" >제목</textarea>
+			<button sec:hasAuthority="hasAuthority('MASTER')" class="updateanddeletebtn" onclick="updateBlog(postNo)">수정하기</button>
+			<button sec:hasAuthority="hasAuthority('MASTER')" class="updateanddeletebtn" onclick="deleteBlog(postNo)">삭제하기</button>
+			<textarea class="textareaunderline" readonly="readonly"></textarea>
 		</div>	
-		<div th:utext="${content}" class="textareacontent" style="padding-left: 10%;">내용</div>
+		<div th:utext="${content}" style="padding-left: 10%;">내용</div>
 	</div>
+	<script th:inline="javascript">
+	    var postNo = /*[[${board.postNo}]]*/ 0;
+	</script>
 </div>

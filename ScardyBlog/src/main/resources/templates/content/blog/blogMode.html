@@ -13,8 +13,7 @@
 				<a href=# th:href="@{/moveBlog}"><-블로그 메인으로</a>
 			</h2>
 			<div class="row row-bottom-padded-md">
-				<div th:each="board:${blogMode}">
-					<div th:text = "board.postNo">123</div>
+				<div th:each="board:${list}">
 					<div class="col-md-3 col-sm-6 col-padding animate-box"
 						data-animate-effect="fadeInLeft">
 						<div class="blog-entry">

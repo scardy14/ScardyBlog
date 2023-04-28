@@ -1237,6 +1237,7 @@ input[type=text] {
     background: transparent;
     color: black;
     font-size: 25px;
+    resize: none;
 }
 
 .textareatitleblog {
@@ -1254,6 +1255,7 @@ input[type=text] {
     background: transparent;
     color: black;
     font-size: 25px;
+    resize: none;
 }
 
 .textareaunderline {
@@ -1267,11 +1269,12 @@ input[type=text] {
     margin-bottom: 20px;
     padding-left: 0px;
     color: #ECF0F5;
-    width: 80%;
+    width: 90%;
     height:0px;
     background: transparent;
     color: black;
     font-size: 25px;
+    resize: none;
 }
 
 .textareacategory {
@@ -1290,6 +1293,7 @@ input[type=text] {
     background: transparent;
     color: black;
     font-size: 25px;
+    resize: none;
 }
 
 input[type=password] {
@@ -1389,5 +1393,10 @@ label {
 }
 .tox-toolbar {
     background-color: blue;
+}
+
+.updateanddeletebtn {
+	border: none;
+	background-color: transparent;
 }
 /*# sourceMappingURL=style.css.map */

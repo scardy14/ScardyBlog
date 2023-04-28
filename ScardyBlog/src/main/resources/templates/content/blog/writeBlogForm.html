@@ -14,14 +14,14 @@
 <div layout:fragment="content">
 	<br><br><br><br><br>
 	<div id="fh5co-main" style="text-align: center;">
-	    <form method="post" th:action="@{/writeBlogPost}">
+	    <form method="post" th:action="@{/writeBlogPost}" enctype="multipart/form-data">
 	    	<select name = "category" class="textareacategory" style="vertical-align: top;">
-	    		<option th:each="category : ${cList}" th:value="${category}" th:text="${category}"></option>
+	    		<option th:each="category : ${categoryList}" th:value="${category}" th:text="${category}"></option>
 	    	</select>&nbsp;&nbsp;
 	    	<textarea name = "title" placeholder="제목" class="textareatitle">제목</textarea><br>
-	    	<div  style="padding-left: 10%; color: whitesmoke; background-color: whitesmoke;"><textarea  name = "content" id="editor">Hello, World!</textarea></div>
+	    	<div  style="padding-left: 8%;"><textarea  name = "content" id="editor">내용</textarea></div>
 	        <input type = "hidden" name = "id" th:value="${#authentication.getName()}">
-	        <input type = "hidden" id="thumbnail" th:value = "sc" name = "thumbnail">
+	        <input type = "hidden" id="thumbnail" th:value = "empty" name = "thumbnail">
 	        <br>
 	        <br>
 	        <button type="submit" id="save" class="btn btn-outline-primary">게시글 저장</button>
@@ -48,7 +48,7 @@ $(function(){
     	language: "ko_KR", //한글판으로 변경
         selector: '#editor',
         elementpath: false,
-        width: "89%", // width 값을 100%로 설정
+        width: "91%",
         statusbar: false,
         //menubar: false,
         plugins: plugins,
@@ -82,7 +82,7 @@ $(function(){
         },
         /*** image upload ***/
         
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; background-color: whitesmoke;}'
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; background-color: white;}'
     });
 
 

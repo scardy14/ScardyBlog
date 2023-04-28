@@ -10,13 +10,13 @@ public interface BlogRepository extends JpaRepository<Blog, Integer>{
 	@Query("SELECT MAX(postNo) FROM Blog")
 	int findMaxNo();
 	
-	@Query("SELECT b FROM Blog b where category= ?1 AND rownum <=4 ORDER BY rownum DESC")
+	@Query("SELECT b FROM Blog b where b.category= ?1 AND b.status = 'visible' AND rownum <=4 ORDER BY b.postNo DESC")
 	List<Blog> findListByCategoryForBlog(String category);
 	
-	@Query("SELECT b FROM Blog b where  category= ?1 ORDER BY b.postNo DESC")
+	@Query("SELECT b FROM Blog b where b.status = 'visible' AND category= ?1 ORDER BY b.postNo DESC")
 	List<Blog> findListByCategoryForBlogMode(String category);
 	
-	@Query("SELECT b FROM Blog b where  rownum<=4 ORDER BY b.postNo DESC")
+	@Query("SELECT b FROM Blog b where b.status = 'visible' AND rownum<=4 ORDER BY b.postNo DESC")
 	List<Blog> findListByRecent4();
 
 }

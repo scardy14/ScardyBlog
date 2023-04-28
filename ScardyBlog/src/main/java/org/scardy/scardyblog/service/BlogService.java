@@ -4,11 +4,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.rowset.serial.SerialException;
+
 import org.scardy.scardyblog.entity.Blog;
 import org.scardy.scardyblog.entity.Category;
 
 public interface BlogService {
-	public boolean wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail );
+	
+	public void wirteBlogPost(String id, String category, String title, StringBuilder content, String thumbnail ) throws SerialException, SQLException;
+	
+	public void updateBlogPost(String id, int postNo, String category, String title, StringBuilder content, String thumbnail ) throws SerialException, SQLException;
 	
 	public Blog findBlogInfoByPostNo(int postNo) throws SQLException, IOException;
 	
@@ -20,6 +25,6 @@ public interface BlogService {
 	
 	public List<Blog> findListByRecent4();
 
-	public String writeCategory(Category category);
+	public void writeCategory(Category category);
 	
 }

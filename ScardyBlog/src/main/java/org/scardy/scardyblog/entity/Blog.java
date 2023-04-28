@@ -4,6 +4,7 @@ package org.scardy.scardyblog.entity;
 
 import java.sql.Clob;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -37,9 +39,9 @@ public class Blog {
 	@Column
 	private String id;
 	@Column
-	private Date post_date;
+	private Date post_date = Date.valueOf(LocalDateTime.now().toLocalDate());
 	@Column
-	private Date update_date;
+	private Date update_date = Date.valueOf(LocalDateTime.now().toLocalDate());
 	@Column
 	private String thumbnail;
 	@Column
@@ -63,8 +65,6 @@ public class Blog {
 		this.post_date = post_date;
 		this.update_date = update_date;
 		this.thumbnail = thumbnail;
-	}
-	
-	
+	}	
 	
 }
