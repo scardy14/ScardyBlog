@@ -22,7 +22,6 @@ public class BlogController {
 	public String writeBlogPost(@RequestParam("id")String id, @RequestParam("category")String category, @RequestParam("title")String title, @RequestParam("content")StringBuilder content, @RequestParam("thumbnail")String thumbnail) {
 		try {
 			blogService.wirteBlogPost(id, category, title, content, thumbnail);
-			System.out.println(content);
 			return "redirect:/moveWriteBlogSuccess";
 		} catch (Exception e) {
 			return "redirect:/moveWriteBlogFail";

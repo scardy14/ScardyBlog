@@ -12,7 +12,6 @@ ALTER TABLE account ADD CONSTRAINT PK_ACCOUNT PRIMARY KEY (
 
 
 
-
 CREATE TABLE authority (
 	id	varchar2(100)		NOT NULL,
 	grade	varchar2(100)		NOT NULL
@@ -29,7 +28,6 @@ ALTER TABLE authority ADD CONSTRAINT FK_account_TO_authority_1 FOREIGN KEY (
 
 
 
-
 CREATE SEQUENCE category_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE category (
     seq NUMBER NOT NULL,
@@ -42,7 +40,7 @@ ALTER TABLE category ADD CONSTRAINT UK_category UNIQUE (
 	category
 );
 ------------------------------------------------------------------
-CREATE SEQUENCE blog_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE blog_seq START WITH 1 INCREMENT BY 1; 
 CREATE TABLE blog (
 	post_No	number		NOT NULL,
 	category	varchar2(100)		NOT NULL,
@@ -86,7 +84,7 @@ ALTER TABLE community_category ADD CONSTRAINT UK_community_category UNIQUE (
 	category
 );
 -----------------------------------------------------------------------
-CREATE SEQUENCE community_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE community_seq START WITH 1 INCREMENT BY 1;  
 CREATE TABLE community (
 	post_No	number		NOT NULL,
 	category	varchar2(100)		NOT NULL,
@@ -128,7 +126,7 @@ ALTER TABLE memo_category ADD CONSTRAINT UK_memo_category UNIQUE (
 	category
 );
 -----------------------------------------------------------------------
-CREATE SEQUENCE memo_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE memo_seq START WITH 1 INCREMENT BY 1; 
 CREATE TABLE memo (
 	post_No	number		NOT NULL,
 	category	varchar2(100)		NOT NULL,
@@ -157,9 +155,22 @@ ALTER TABLE memo ADD CONSTRAINT FK_memo_category FOREIGN KEY (
 
 
 
+DROP TABLE memo;
+DROP TABLE memo_category;
+DROP TABLE community;
+DROP TABLE community_category;
+DROP TABLE blog;
+DROP TABLE category;
+DROP TABLE authority;
+DROP TABLE account;
+
+
 
 
 SELECT * FROM account;
 SELECT * FROM authority;
 SELECT * FROM blog;
+SELECT * FROM community;
+
+
 

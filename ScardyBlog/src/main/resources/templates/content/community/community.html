@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+	layout:decorate="~{main}">
+<!--/* 위 선언은 타임리프 레이아웃을 사용하기 위한 설정   */-->
+<head>
+<title>index</title>
+</head>
+<div layout:fragment="content">
+	<div id="fh5co-main">
+		<div class="fh5co-narrow-content ">
+			<table class="table table-hover col-md-offset-1">
+				<tbody th:each="board:${communityList}">
+					<tr class=" animate-box col-md-10" data-animate-effect="fadeInLeft">
+						<td class="col-md-2">
+							<a th:href="@{moveCommunityDetail(postNo=${board.postNo})}" class="blog-img"><img th:src="@{data:image/png;base64,} + ${board.thumbnail}" class="img-responsive" alt="" style="width:100%; height: auto;"></a>
+						</td>
+						<td>
+							<div class="full blog_cont">
+			                    <h4 th:text="${board.title}">The biggest and most awesome camera  of  year</h4>
+			                    <h5 th:text="${board.post_date}">MAY 14 2019 5 READ</h5>
+			                    <p th:text="${board.id}">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+		                    </div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="text-align: right;" sec:authorize="isAuthenticated()" >
+				<button type="button" th:onclick="moveWriteCommunityForm()" th:text="글쓰기" class="btn btn-outline-primary" style="width: 150px;"></button>
+			</div>
+		</div>
+	</div>
+</div>

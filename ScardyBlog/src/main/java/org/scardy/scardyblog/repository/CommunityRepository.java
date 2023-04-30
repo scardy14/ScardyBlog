@@ -7,16 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface CommunityRepository extends JpaRepository<Community, Integer>{
-	@Query("SELECT MAX(postNo) FROM Community")
-	int findMaxNo();
+	@Query("SELECT c FROM Community c where c.status = 'visible' ORDER BY c.postNo DESC")
+	List<Community> findCommunityList();
 	
-	@Query("SELECT c FROM Community c where category= ?1 AND rownum <=4 ORDER BY rownum DESC")
-	List<Community> findListByCategoryForMain(String category);
+	@Query("SELECT c FROM Community c where c.status = 'visible' AND c.category= ?1 ORDER BY c.postNo DESC")
+	List<Community> findCommunityListByCategory(String category);
 	
-	@Query("SELECT c FROM Community c where  category= ?1 ORDER BY c.postNo DESC")
-	List<Community> findListByCategoryForCommunity(String category);
-	
-	@Query("SELECT c FROM Community c where  rownum<=4 ORDER BY c.postNo DESC")
-	List<Community> findListByRecent4();
+	@Query("SELECT c FROM Community c where c.status = 'visible' AND rownum<=4 ORDER BY c.postNo DESC")
+	List<Community> findCommunityListByRecent4();
 
 }

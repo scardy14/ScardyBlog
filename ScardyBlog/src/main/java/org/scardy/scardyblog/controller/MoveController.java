@@ -8,6 +8,7 @@ import java.util.List;
 import org.scardy.scardyblog.entity.Blog;
 import org.scardy.scardyblog.service.BlogService;
 import org.scardy.scardyblog.service.CategoryService;
+import org.scardy.scardyblog.service.CommunityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +19,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MoveController{
 	private final BlogService blogService;
+	private final CommunityService communityService;
 	private final CategoryService categoryService;
 	///////////////////////////////////////////////////////////////////////////
 	@GetMapping(value= {"/","/index","/home",""})
 	public String homeMove(Model model) {
 		model.addAttribute("mode", "home");
-		model.addAttribute("recentList", blogService.findListByRecent4());
+		model.addAttribute("recentBlogList", blogService.findListByRecent4());
+		model.addAttribute("recentCommunityList", communityService.findCommunityListByRecent4());
 		return "content/index";
 	}
 	///////////////////////////////////////////////////////////////////////////
@@ -91,12 +94,14 @@ public class MoveController{
 	///////////////////////////////////////////////////////////////////////////
 	
 	///////////////////////////////////////////////////////////////////////////
-	
-	
 	@GetMapping("/moveAbout")
 	public String aboutMove(Model model) {
 		model.addAttribute("mode", "abount");
 		return "content/about";
+	}
+	@GetMapping("/moveWriteCommunityForm")
+	public String moveWriteCommunityForm(Model model) {
+		return "content/community/writeCommunityForm";
 	}
 	@GetMapping("/moveMemo")
 	public String moveMemo(Model model) {
@@ -110,7 +115,19 @@ public class MoveController{
 	@GetMapping("/moveCommunity")
 	public String moveCommunity(Model model) {
 		model.addAttribute("mode", "community");
-		return "content/community";
+		model.addAttribute("communityList",communityService.findCommunityList());
+		return "content/community/community";
+	}
+	@GetMapping("/moveCommunityDetail")
+	public String moveCommunityDetail(Model model, int postNo) {
+		try {
+			model.addAttribute("board",communityService.findCommunityInfoByPostNo(postNo));
+			model.addAttribute("content",communityService.findCommunityContentByPostNo(postNo).toString());
+			return "content/community/communityDetail";
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+			return "content/community/communityDetail-fail";			
+		}
 	}
 	///////////////////////////////////////////////////////////////////////////
 	
