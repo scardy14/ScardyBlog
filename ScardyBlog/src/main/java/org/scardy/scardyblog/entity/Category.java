@@ -22,9 +22,11 @@ public class Category {
 	@Column(name="seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
 	int seq;
-	
 	@Column
 	String category;
+	@Column
+	String status = "visible";
+	
 
 	public Category(String category) {
 		super();

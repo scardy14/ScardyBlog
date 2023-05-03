@@ -12,7 +12,6 @@ import java.util.List;
 import javax.sql.rowset.serial.SerialClob;
 import javax.sql.rowset.serial.SerialException;
 
-import org.scardy.scardyblog.entity.Blog;
 import org.scardy.scardyblog.entity.Community;
 import org.scardy.scardyblog.repository.CommunityRepository;
 import org.springframework.stereotype.Service;

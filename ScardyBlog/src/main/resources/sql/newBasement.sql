@@ -11,7 +11,6 @@ ALTER TABLE account ADD CONSTRAINT PK_ACCOUNT PRIMARY KEY (
 );
 
 
-
 CREATE TABLE authority (
 	id	varchar2(100)		NOT NULL,
 	grade	varchar2(100)		NOT NULL
@@ -27,11 +26,11 @@ ALTER TABLE authority ADD CONSTRAINT FK_account_TO_authority_1 FOREIGN KEY (
 
 
 
-
 CREATE SEQUENCE category_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE category (
     seq NUMBER NOT NULL,
-    category VARCHAR2(100) NOT NULL
+    category VARCHAR2(100) NOT NULL,
+    status VARCHAR2(100) NOT NULL
 );
 ALTER TABLE category ADD CONSTRAINT PK_category PRIMARY KEY (
 	seq
@@ -170,7 +169,7 @@ DROP TABLE account;
 SELECT * FROM account;
 SELECT * FROM authority;
 SELECT * FROM blog;
+SELECT * FROM category;
 SELECT * FROM community;
-
 
 

@@ -12,7 +12,7 @@ public class AuthorityServiceImpl implements AuthorityService{
 	private final AuthorityRepository authorityRepository;
 	@Override
 	public boolean register(String id) {
-		Authority grade= new Authority(id, "normal");
+		Authority grade= new Authority(id, "NORMAL");
 		boolean result=false;
 		try {
 			authorityRepository.save(grade);

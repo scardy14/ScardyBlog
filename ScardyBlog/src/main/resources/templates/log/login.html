@@ -4,7 +4,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 	layout:decorate="~{main}">
 <head>
-<title>Blog</title>
+<title>LOGIN</title>
 </head>
 <div layout:fragment="content">
 	<div id="fh5co-main">
@@ -52,8 +52,8 @@
 									</div>
 								</form>
 								<br><br><br>
-								<a th:href="@{/moveUpdateAccountForm}" style="float: left; padding-left: 20%;">회원정보수정</a>
-								<a th:href="@{/moveDeleteAccountForm}" style="float: right; padding-right: 20%;">회원탈퇴</a>
+								<!-- <a th:href="@{/moveUpdateAccountForm}" style="float: left; padding-left: 20%;">회원정보수정</a>-->
+								<!-- <a th:href="@{/moveDeleteAccountForm}" style="float: right; padding-right: 20%;">회원탈퇴</a> -->
 								<a th:href="@{/admin/main}" sec:authorize="hasRole('MASTER')">관리자모드</a><br>	
 							</th:block>
 	                        </div>

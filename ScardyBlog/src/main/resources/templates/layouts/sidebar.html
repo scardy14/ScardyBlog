@@ -23,12 +23,12 @@
 					<!-- class="fh5co-active" -->
 					<li th:classappend="${mode} == 'blog' ? 'fh5co-active'"><a
 						href="#" th:href="@{/moveBlog}" style="color: white;">Blog</a></li>
-					<li th:classappend="${mode} == 'memo' ? 'fh5co-active'"><a
-						href=# th:href="@{/moveMemo}" style="color: white;">Memo</a></li>
+					<!--<li th:classappend="${mode} == 'memo' ? 'fh5co-active'"><a
+						href=# th:href="@{/moveMemo}" style="color: white;">Memo</a></li> -->
 					<li th:classappend="${mode} == 'community' ? 'fh5co-active'"><a
 						href="#" th:href="@{/moveCommunity}" style="color: white;">Community</a></li>
-					<li th:classappend="${mode} == 'abount' ? 'fh5co-active'"><a
-						href="#" th:href="@{/moveAbout}" style="color: white;">About</a></li>
+					<!--<li th:classappend="${mode} == 'abount' ? 'fh5co-active'"><a
+						href="#" th:href="@{/moveAbout}" style="color: white;">About</a></li>-->
 					<li th:classappend="${mode} == 'log' ? 'fh5co-active'">
 						<a href="#" th:href="@{/moveLogin}" style="color: white;" sec:authorize="isAnonymous()">Login</a>
 						<a href="#" th:href="@{/moveLogin}" style="color: white;" sec:authorize="isAuthenticated()">Logout</a>

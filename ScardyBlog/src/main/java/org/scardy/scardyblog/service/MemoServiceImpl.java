@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemoServiceImpl implements MemoService {
 	private final MemoRepository MemoRepository;
-	private final CategoryRepository categoryRepository;
+	//private final CategoryRepository categoryRepository;
 
 	@Transactional
 	public boolean wirteMemoPost(String id, String category, String title, StringBuilder content, String thumbnail ) {
