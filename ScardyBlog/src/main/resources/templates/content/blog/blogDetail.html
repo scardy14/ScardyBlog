@@ -11,8 +11,8 @@
 	<div id="fh5co-main">
 		<div style="padding-left: 10%;">
 			<textarea th:utext="[+${board.category}+]  +${board.getTitle()}" class="textareatitleblog" readonly="readonly" >제목</textarea>
-			<button sec:hasAuthority="hasAuthority('MASTER')" class="updateanddeletebtn" onclick="updateBlog(postNo)">수정하기</button>
-			<button sec:hasAuthority="hasAuthority('MASTER')" class="updateanddeletebtn" onclick="deleteBlog(postNo)">삭제하기</button>
+			<button sec:authorize="hasAuthority('MASTER')" class="updateanddeletebtn" onclick="updateBlog(postNo)">수정하기</button>
+			<button sec:authorize="hasAuthority('MASTER')" class="updateanddeletebtn" onclick="deleteBlog(postNo)">삭제하기</button>
 			<textarea class="textareaunderline" readonly="readonly"></textarea>
 		</div>
 		<div style="float:right; padding-right: 10%;">
@@ -28,7 +28,7 @@
 				</tr>
 			</table>
 		</div>
-		<div th:utext="${content}" style="padding-left: 10%; clear: both;">내용</div>
+		<div th:utext="${content}" style="padding-left: 10%; clear: both; font-family: 'Nanum Gothic'">내용</div>
 	</div>
 	<script th:inline="javascript">
 	    var postNo = /*[[${board.postNo}]]*/ 0;

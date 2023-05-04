@@ -112,7 +112,6 @@ ALTER TABLE community ADD CONSTRAINT FK_community_category FOREIGN KEY (
 
 
 
-
 CREATE SEQUENCE memo_category_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE memo_category (
     seq NUMBER NOT NULL,
@@ -162,6 +161,12 @@ DROP TABLE blog;
 DROP TABLE category;
 DROP TABLE authority;
 DROP TABLE account;
+DROP SEQUENCE category_seq;
+DROP SEQUENCE blog_seq;
+DROP SEQUENCE community_category_seq;
+DROP SEQUENCE community_seq; 
+DROP SEQUENCE memo_category_seq;
+DROP SEQUENCE memo_seq;
 
 
 

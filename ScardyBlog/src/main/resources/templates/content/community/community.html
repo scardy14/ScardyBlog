@@ -9,9 +9,9 @@
 </head>
 <div layout:fragment="content">
 	<div id="fh5co-main">
-		<div class="fh5co-narrow-content ">
-			<table class="table table-hover col-md-offset-1">
-				<tbody th:each="board:${communityList}">
+		<div class="fh5co-narrow-content">
+			<table class="table table-hover col-md-offset-1"  th:each="board:${communityList}">
+				<tbody>
 					<tr class=" animate-box col-md-10" data-animate-effect="fadeInLeft">
 						<td class="col-md-2">
 							<a th:href="@{moveCommunityDetail(postNo=${board.postNo})}" class="blog-img"><img th:src="@{data:image/png;base64,} + ${board.thumbnail}" class="img-responsive" alt="" style="width:100%; height: auto;"></a>

@@ -470,7 +470,8 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 .blog-entry {
   width: 100%;
   float: left;
-  background: #fff;
+  background: transparent;
+  border: 1px solid #c0c0c0;
 }
 @media screen and (max-width: 768px) {
   .blog-entry {
@@ -499,6 +500,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 }
 .blog-entry .desc {
   padding: 25px;
+  
 }
 .blog-entry .desc h3 {
   font-size: 15px;
