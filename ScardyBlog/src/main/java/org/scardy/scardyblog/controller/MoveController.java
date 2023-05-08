@@ -97,17 +97,14 @@ public class MoveController{
 	@GetMapping("/moveAbout")
 	public String aboutMove(Model model) {
 		model.addAttribute("mode", "abount");
-		return "content/about";
+		return "content/about/about";
 	}
-	@GetMapping("/moveWriteCommunityForm")
-	public String moveWriteCommunityForm(Model model) {
-		return "content/community/writeCommunityForm";
+	@GetMapping("/moveUpdateAboutForm")
+	public String moveupdateAboutForm(Model model) {
+		return "content/about/updateAboutForm";
 	}
-	@GetMapping("/moveMemo")
-	public String moveMemo(Model model) {
-		model.addAttribute("mode", "memo");
-		return "content/memo";
-	}
+	
+	
 	
 	///////////////////////////////////////////////////////////////////////////
 	
@@ -117,6 +114,10 @@ public class MoveController{
 		model.addAttribute("mode", "community");
 		model.addAttribute("communityList",communityService.findCommunityList());
 		return "content/community/community";
+	}
+	@GetMapping("/moveWriteCommunityForm")
+	public String moveWriteCommunityForm(Model model) {
+		return "content/community/writeCommunityForm";
 	}
 	@GetMapping("/moveCommunityDetail")
 	public String moveCommunityDetail(Model model, int postNo) {
@@ -155,6 +156,12 @@ public class MoveController{
 	}
 	///////////////////////////////////////////////////////////////////////////
 	
-	
+	///////////////////////////////////////////////////////////////////////////
+	@GetMapping("/moveMemo")
+	public String moveMemo(Model model) {
+		model.addAttribute("mode", "memo");
+		return "content/memo";
+	}
+	///////////////////////////////////////////////////////////////////////////
 	
 }

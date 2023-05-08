@@ -14,10 +14,7 @@
 <div layout:fragment="content">
 	<br><br><br><br><br>
 	<div id="fh5co-main" style="text-align: center;">
-	    <form method="post" th:action="@{/writeBlogPost}" enctype="multipart/form-data">
-	    	<select name = "category" class="textareacategory" style="vertical-align: top;">
-	    		<option th:each="category : ${categoryList}" th:value="${category}" th:text="${category}"></option>
-	    	</select>&nbsp;&nbsp;
+	    <form method="post" th:action="@{/updateAbout}" enctype="multipart/form-data">
 	    	<textarea name = "title" placeholder="제목" class="textareatitle">제목</textarea><br>
 	    	<div  style="padding-left: 8%;"><textarea  name = "content" id="editor">내용</textarea></div>
 	        <input type = "hidden" name = "id" th:value="${#authentication.getName()}">

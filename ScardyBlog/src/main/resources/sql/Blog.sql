@@ -153,20 +153,30 @@ ALTER TABLE memo ADD CONSTRAINT FK_memo_category FOREIGN KEY (
 
 
 
-DROP TABLE memo;
-DROP TABLE memo_category;
-DROP TABLE community;
-DROP TABLE community_category;
-DROP TABLE blog;
-DROP TABLE category;
-DROP TABLE authority;
-DROP TABLE account;
-DROP SEQUENCE category_seq;
-DROP SEQUENCE blog_seq;
-DROP SEQUENCE community_category_seq;
-DROP SEQUENCE community_seq; 
-DROP SEQUENCE memo_category_seq;
-DROP SEQUENCE memo_seq;
+
+CREATE TABLE about(
+	post_no number NOT NULL,
+	content clob NOT NULL
+);
+ALTER TABLE about ADD CONSTRAINT PK_about PRIMARY KEY(
+	post_no
+);
+
+
+--DROP TABLE memo;
+--DROP TABLE memo_category;
+--DROP TABLE community;
+--DROP TABLE community_category;
+--DROP TABLE blog;
+--DROP TABLE category;
+--DROP TABLE authority;
+--DROP TABLE account;
+--DROP SEQUENCE category_seq;
+--DROP SEQUENCE blog_seq;
+--DROP SEQUENCE community_category_seq;
+--DROP SEQUENCE community_seq; 
+--DROP SEQUENCE memo_category_seq;
+--DROP SEQUENCE memo_seq;
 
 
 

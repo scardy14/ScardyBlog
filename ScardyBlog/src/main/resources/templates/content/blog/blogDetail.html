@@ -6,6 +6,7 @@
 <head>
 <title>Blog</title>
 </head>
+
 <div layout:fragment="content">
 <br>
 	<div id="fh5co-main">
@@ -28,7 +29,7 @@
 				</tr>
 			</table>
 		</div>
-		<div th:utext="${content}" style="padding-left: 10%; clear: both; font-family: 'Nanum Gothic'">내용</div>
+		<div th:utext="${content}" style="padding-left: 10%; clear: both;">내용</div>
 	</div>
 	<script th:inline="javascript">
 	    var postNo = /*[[${board.postNo}]]*/ 0;

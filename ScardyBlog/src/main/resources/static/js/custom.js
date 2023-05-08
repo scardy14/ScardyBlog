@@ -12,6 +12,11 @@ function moveWriteCommunityForm() {
 		location.href = "moveWriteCommunityForm";
 	}
 }
+function moveUpdateAboutForm() {
+	if(confirm("블로그 정보를 수정하시겠습니까?")) {
+		location.href = "moveUpdateAboutForm";
+	}
+}
 
 $(document).ready(function() {
 			/////////////////////////////////////////////////////////////////////////////
@@ -163,4 +168,67 @@ $(document).ready(function() {
 				});
 			})
 			/////////////////////////////////////////////////////////////////////////////
-		});
+			/////////////////////////////////////////////////////////////////////////////
+			var plugins = [
+		        "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor",
+		        "searchreplace", "visualblocks", "code", "insertdatetime", "media", "table",
+		        "paste", "code", "help", "wordcount", "save", "autoresize"
+		    ];
+		    var edit_toolbar = 'formatselect fontselect fontsizeselect |'
+		               + ' forecolor backcolor |'
+		               + ' bold italic underline strikethrough |'
+		               + ' alignjustify alignleft aligncenter alignright |'
+		               + ' bullist numlist |'
+		               + ' table tabledelete |'
+		               + ' link image';
+		
+		    tinymce.init({
+		    	language: "ko_KR", //한글판으로 변경
+		        selector: '#editor',
+		        elementpath: false,
+		        width: "91%",
+		        statusbar: false,
+		        //menubar: false,
+		        plugins: plugins,
+		        content_css: 'style.css',
+		        toolbar: edit_toolbar,
+		        toolbar_sticky: true, // 스크롤시 툴바 고정 여부
+		        location: "folder/sub-folder/new-location.png",
+		        //font_foramts: 'custom font name=origin font name, sub1, sub2...; other...;'
+		        image_title: true,
+		        automatic_uploads: true,
+		        file_picker_types: 'image',
+		        file_picker_callback: function (cb, value, meta) {
+		            var input = document.createElement('input');
+		            input.setAttribute('type', 'file');
+		            input.setAttribute('accept', 'image/*');
+		            input.onchange = function () {
+		                var file = this.files[0];
+		                var reader = new FileReader();
+		                reader.onload = function () {
+		                    var id = 'blobid' + (new Date()).getTime();
+		                    var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+		                    var base64 = reader.result.split(',')[1];
+		                    var blobInfo = blobCache.create(id, file, base64);
+		                    document.getElementById('thumbnail').value = blobInfo.base64();
+		                    blobCache.add(blobInfo);
+		                    cb(blobInfo.blobUri(), { title: file.name });
+		                };
+		                reader.readAsDataURL(file);
+		            };
+		            input.click();
+		        },
+		        /*** image upload ***/
+		        
+		        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; background-color: white;}'
+		    });
+
+		    $("#save").on("click", function(){
+		        var content = tinymce.activeEditor.getContent();
+		        console.log(content);
+		    });
+		    /////////////////////////////////////////////////////////////////////////////
+    
+});
+		
+		
