@@ -14,7 +14,7 @@
 			class="border js-fullheight" style="background-color: #222222;">
 
 			<h1 id="fh5co-logo">
-				<a href="#" th:href="@{/home}" style="color: white;">Scardy</a>
+				<a href="#" th:href="@{/home}" style="color: white;">Blog</a>
 			</h1>
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
@@ -22,7 +22,7 @@
 						href="#" th:href="@{/home}" style="color: white;">Home</a></li>
 					<!-- class="fh5co-active" -->
 					<li th:classappend="${mode} == 'blog' ? 'fh5co-active'"><a
-						href="#" th:href="@{/moveBlog}" style="color: white;">Blog</a></li>
+						href="#" th:href="@{/moveBlog}" style="color: white;">Post</a></li>
 					<!--<li th:classappend="${mode} == 'memo' ? 'fh5co-active'"><a
 						href=# th:href="@{/moveMemo}" style="color: white;">Memo</a></li> -->
 					<li th:classappend="${mode} == 'community' ? 'fh5co-active'"><a
